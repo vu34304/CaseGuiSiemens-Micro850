@@ -231,7 +231,10 @@ namespace DemoCaseGui.Core.Application.ViewModels
                     Direction = false;
             }
 
-
+            /////
+            //////
+            ///
+            ///
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/angleRB3100", JsonConvert.SerializeObject(_s7Client.GetTag("angleRB3100")), false);
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/countRB3100", JsonConvert.SerializeObject(_s7Client.GetTag("countRB3100")), false);
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/tempTW2000", JsonConvert.SerializeObject(_s7Client.GetTag("tempTW2000")), false);
