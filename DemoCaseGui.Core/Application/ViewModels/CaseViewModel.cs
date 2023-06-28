@@ -240,12 +240,14 @@ namespace DemoCaseGui.Core.Application.ViewModels
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/statusO5C500", JsonConvert.SerializeObject(_s7Client.GetTag("statusO5C500")), false);
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/statusUGT524", JsonConvert.SerializeObject(_s7Client.GetTag("statusUGT524")), false);
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/distanceUGT524", JsonConvert.SerializeObject(_s7Client.GetTag("distanceUGT524")), false);
-
+            ///
+            ///
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/ledGreen", JsonConvert.SerializeObject(_s7Client.GetTag("ledGreen")), false);
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/ledRed", JsonConvert.SerializeObject(_s7Client.GetTag("ledRed")), false);
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/ledYellow", JsonConvert.SerializeObject(_s7Client.GetTag("ledYellow")), false);
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/DCMotor", JsonConvert.SerializeObject(_s7Client.GetTag("DCMotor")), false);
-
+            /////
+            ///////
             //await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/speed", JsonConvert.SerializeObject(_s7Client.GetTag("speed")), false);
         }
 
