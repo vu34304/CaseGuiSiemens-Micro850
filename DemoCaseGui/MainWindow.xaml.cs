@@ -33,4 +33,9 @@ public partial class MainWindow : Window
     {
 
     }
+
+    private void CaseMicroView_Loaded(object sender, RoutedEventArgs e)
+    {
+
+    }
 }

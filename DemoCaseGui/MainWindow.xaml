@@ -10,7 +10,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:components="clr-namespace:DemoCaseGui.Resources.Components" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
-        Title="VTS Data Acquisition Application" Height="780" Width="1200" Icon="/logo-101.png">
+        WindowStartupLocation="CenterScreen"
+        Title="VTS Data Acquisition Application" Height="780" Width="1500" Icon="/logo-101.png">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -42,7 +43,7 @@
                         Content="Monitor"
                         Padding="5"/>
                 </TabItem.Header>
-                <local:CaseView ></local:CaseView>
+                <local:CaseView/>
             </TabItem>
 
             <TabItem Height="50" Width="auto" Padding="5">
@@ -53,6 +54,15 @@
                         Padding="5"/>
                 </TabItem.Header>
                 <local:FilterView></local:FilterView>
+            </TabItem>
+            <TabItem Height="50" Width="auto" Padding="5">
+                <TabItem.Header>
+                    <HeaderedContentControl  
+                        Style="{StaticResource TabTitle}"
+                        Content="Micro850Case"
+                        Padding="5"/>
+                </TabItem.Header>
+                <local:CaseMicroView Loaded="CaseMicroView_Loaded"></local:CaseMicroView>
             </TabItem>
         </TabControl>
     </Grid>

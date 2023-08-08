@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -27,6 +27,20 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
     <PackageReference Include="S7netplus" Version="0.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ASTrialExpiredDialog">
+      <HintPath>..\..\..\..\..\..\Program Files\Automated Solutions\ASComm IoT 1.4 Machine\ASTrialExpiredDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="AutomatedSolutions.ASCommStd">
+      <HintPath>..\..\..\..\..\..\Program Files\Automated Solutions\ASComm IoT 1.4 Machine\AutomatedSolutions.ASCommStd.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.OPCAutomation">
+      <HintPath>..\..\..\..\Downloads\Interop.OPCAutomation.dll\Assemplies\Interop.OPCAutomation.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
   </ItemGroup>
 
 </Project>

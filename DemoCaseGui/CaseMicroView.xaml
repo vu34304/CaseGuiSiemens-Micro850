@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="DemoCaseGui.CaseMicroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local ="clr-namespace:DemoCaseGui"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+             xmlns:components="clr-namespace:DemoCaseGui.Resources.Components"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:viewmodels="clr-namespace:DemoCaseGui.Core.Application.ViewModels;assembly=DemoCaseGui.Core"           
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:CaseMicroViewModel}"
+             d:DesignHeight="660" d:DesignWidth="1500"
+             Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+
+        <Button Grid.Row="0" Margin="10" IsEnabled="{Binding IsConnected}" FontSize="24" Height="39.5">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <prism:InvokeCommandAction Command="{Binding ConnectCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            Connect
+        </Button>
+        <TabControl Grid.Row="1"
+                    Margin="10 0 10 10"                  
+                    Style="{StaticResource MaterialDesignFilledTabControl}">
+            <TabItem Height="40" Width="auto" Padding="5">
+                <TabItem.Header>
+                    <HeaderedContentControl  
+                        Style="{StaticResource TabTitle}"
+                        Content="ĐÈN GIAO THÔNG"
+                        FontSize="24"
+                        Padding="5"/>
+                </TabItem.Header>
+                <local:TrafficLightsView />
+            </TabItem>
+
+            <TabItem Height="40" Width="auto" Padding="5">
+                <TabItem.Header>
+                    <HeaderedContentControl  
+                        Style="{StaticResource TabTitle}"
+                        Content="BIẾN TẦN VÀ ĐỘNG CƠ"
+                         FontSize="24"
+                        Padding="5"/>
+                </TabItem.Header>
+                <local:Inverter_DCView/>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</UserControl>
