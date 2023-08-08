@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Events;
+using LiveCharts.Wpf;
 
 namespace DemoCaseGui
 {
@@ -23,6 +26,8 @@ namespace DemoCaseGui
         public Inverter_DCView()
         {
             InitializeComponent();
+            DataContext = new Core.Application.ViewModels.CaseMicroViewModel();
         }
+        
     }
 }

@@ -23,6 +23,7 @@ namespace DemoCaseGui
         public TrafficLightsView()
         {
             InitializeComponent();
+            DataContext = new Core.Application.ViewModels.CaseMicroViewModel();
         }
     }
 }

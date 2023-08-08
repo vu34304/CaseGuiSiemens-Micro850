@@ -8,6 +8,7 @@
              xmlns:components="clr-namespace:DemoCaseGui.Resources.Components"
              xmlns:prism="http://prismlibrary.com/" 
              xmlns:local="clr-namespace:DemoCaseGui"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:viewmodels="clr-namespace:DemoCaseGui.Core.Application.ViewModels;assembly=DemoCaseGui.Core"           
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodels:CaseMicroViewModel}"
@@ -188,7 +189,9 @@
 
             </Grid>
         </materialDesign:Card>
-        
+        <materialDesign:Card Grid.Column="1">
+            
+        </materialDesign:Card>
 
     </Grid>
 </UserControl>
