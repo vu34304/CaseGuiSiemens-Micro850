@@ -8,18 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using LiveCharts;
 using Timer = System.Timers.Timer;
 using MqttClient = DemoCaseGui.Core.Application.Communication.MqttClient;
 
 namespace DemoCaseGui.Core.Application.ViewModels
 {
-  
+ 
     public class CaseMicroViewModel : BaseViewModel
     {
         private readonly Micro850Client _Micro850Client;
         private readonly MqttClient _mqttClient;
-        private readonly Timer _timer;  
+        private readonly Timer _timer;
+        public Timer timer;
         public bool IsMqttConnected => _mqttClient.IsConnected;
+        public ChartValues<double> Value { get; set; }
 
         //public bool? ledGreen_old, ledRed_old, ledYellow_old, dCMotor_old, statusIF6123_old, statusKT5112_old, statusO5C500_old, statusUGT524_old;
         //public float? angleRB3100_old, tempTW2000_old;
@@ -103,9 +106,23 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _mqttClient = new MqttClient();
             _timer = new Timer(300);
             _timer.Elapsed += _timer_Elapsed;
-          
+            timer =new Timer(500);
+            timer.Elapsed += Timer_Elapsed;
+            timer.Enabled = true;
+            Value = new ChartValues<double> { };
             MotorSetpointOKCommand = new RelayCommand(WriteMotorSetpoint);
             ConnectCommand = new RelayCommand(Connect);
+        }
+
+        private void Timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            Random rd = new Random();
+            double val = rd.NextDouble() + 10;
+            Value.Add(Math.Round(val,3));
+            if (Value.Count() > 10)
+            {
+                Value.RemoveAt(0);
+            }
         }
 
         private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
@@ -154,6 +171,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
             }
             speed_old = (string?)_Micro850Client.GetTagValue("speed");
+
+
         }
 
 

@@ -189,8 +189,29 @@
 
             </Grid>
         </materialDesign:Card>
-        <materialDesign:Card Grid.Column="1">
-            
+        <materialDesign:Card Grid.Column="1" Margin="0 30 30 30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock>         
+            <TextBlock Name="X"></TextBlock>
+            <TextBlock >, </TextBlock>
+            <TextBlock Name="Y"></TextBlock>
+        </TextBlock>
+                <lvc:CartesianChart Grid.Row="1" Name="Chart" Zoom="Xy">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis RangeChanged="Axis_OnRangeChanged" 
+                          RangeChangedCommand="{Binding RangeChangedCommand}"/>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.Series>
+                        <lvc:LineSeries Values="{Binding Value}"                              
+                                Fill="Transparent" StrokeThickness="4" 
+                                Panel.ZIndex="2" PointGeometrySize="25"/>
+                    </lvc:CartesianChart.Series>
+                </lvc:CartesianChart>
+            </Grid>
         </materialDesign:Card>
 
     </Grid>
