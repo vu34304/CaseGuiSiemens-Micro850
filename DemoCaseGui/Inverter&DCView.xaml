@@ -197,7 +197,6 @@
                 </Grid.RowDefinitions>
                 <TextBlock>         
             <TextBlock Name="X"></TextBlock>
-            <TextBlock >, </TextBlock>
             <TextBlock Name="Y"></TextBlock>
         </TextBlock>
                 <lvc:CartesianChart Grid.Row="1" Name="Chart" Zoom="Xy">

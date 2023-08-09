@@ -27,6 +27,7 @@ namespace DemoCaseGui.Core.Application.Communication
 
         public Micro850Client()
         {
+            //Khoi tao PLC
             myChannel = new ABLogix.Net.Channel();           
             myDevice = new ABLogix.Device("192.168.1.50");
             myGroup = new ABLogix.Group(false, 100);
@@ -45,13 +46,22 @@ namespace DemoCaseGui.Core.Application.Communication
             Tags = new()
         {
             
-         
+            //TrafficLights
             new("led2", "PLC.Vali_Siemens.led2", null, "_IO_EM_DO_02", DateTime.Now),
             new("led3", "PLC.Vali_Siemens.led3", null, "_IO_EM_DO_03", DateTime.Now),
             new("led4", "PLC.Vali_Siemens.led4", null, "_IO_EM_DO_04", DateTime.Now),
             new("led5", "PLC.Vali_Siemens.led5", null, "_IO_EM_DO_05", DateTime.Now),
             new("led6", "PLC.Vali_Siemens.led6", null, "_IO_EM_DO_06", DateTime.Now),
             new("led7", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+
+            new("edit_redled", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+            new("edit_yellowled", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+            new("edit_greenled", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+
+            new("start_trafficlight", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+            new("stop_trafficlight", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+
+            //Inverter
             new("start", "PLC.Vali_Siemens.led7", null, "HMI_DB.Inverter.Start", DateTime.Now),
             new("stop", "PLC.Vali_Siemens.led7", null, "HMI_DB.Inverter.Stop", DateTime.Now),
             new("setpoint", "PLC.Inverter.setpoint", null, "HMI_DB.Inverter.Speed_SP", DateTime.Now),
@@ -121,7 +131,7 @@ namespace DemoCaseGui.Core.Application.Communication
                 case "False":
                     value =false; break;
                 default:
-                    value = tem; break;
+                    value = double.Parse(tem); break;
             }  
             return value;
         }        

@@ -51,7 +51,7 @@
                         <Button     
                                     Grid.Column="0"
                                     Margin="10"                                 
-                                    Command="{Binding DeleteCommand}" 
+                                    Command="{Binding StartTrafficLightsCommand}" 
                                     Background="#e6a825"
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
@@ -60,7 +60,7 @@
                         <Button     
                                     Grid.Column="1"
                                     Margin="10"                        
-                                    Command="{Binding DeleteCommand}" 
+                                    Command="{Binding StopTrafficLightsCommand}" 
                                     Background="#e6a825"
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
@@ -97,7 +97,7 @@
                         <TextBox    Margin="10" 
                                     Width="50"
                                     TextAlignment="Center" 
-                                    Text="{Binding Resolution, Mode=TwoWay}" 
+                                    Text="{Binding Edit_RedLed, Mode=TwoWay}" 
                                     HorizontalAlignment="Center"
                                     Grid.Row="0"
                                     Grid.Column="1" />
@@ -112,7 +112,7 @@
                         <TextBox    Margin="10" 
                                     Width="50"
                                     TextAlignment="Center" 
-                                    Text="{Binding Resolution, Mode=TwoWay}" 
+                                    Text="{Binding Edit_YellowLed, Mode=TwoWay}" 
                                     HorizontalAlignment="Center"
                                     Grid.Row="1"
                                     Grid.Column="1"/>
@@ -127,7 +127,7 @@
                         <TextBox    Margin="10" 
                                     Width="50"
                                     TextAlignment="Center" 
-                                    Text="{Binding Resolution, Mode=TwoWay}" 
+                                    Text="{Binding Edit_GreenLed, Mode=TwoWay}" 
                                     HorizontalAlignment="Center"
                                     Grid.Row="2"
                                     Grid.Column="1"/>
@@ -138,7 +138,7 @@
                 <Button     
                                     Grid.Row="3"
                                     Margin="10"                        
-                                    Command="{Binding DeleteCommand}" 
+                                    Command="{Binding ConfirmCommand}" 
                                     Background="#e6a825"
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     materialDesign:ButtonAssist.CornerRadius="15" Width="150" Height="30">
