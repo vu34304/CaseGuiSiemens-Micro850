@@ -41,8 +41,9 @@ namespace DemoCaseGui.Core.Application.Communication
         
            
 
-            _timer = new Timer(300);
-            _timer.Elapsed += _timer_Elapsed1;           
+            _timer = new Timer(500);
+            _timer.Elapsed += _timer_Elapsed1;
+        
             Tags = new()
         {
             
@@ -54,16 +55,17 @@ namespace DemoCaseGui.Core.Application.Communication
             new("led6", "PLC.Vali_Siemens.led6", null, "_IO_EM_DO_06", DateTime.Now),
             new("led7", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
 
-            new("edit_redled", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
-            new("edit_yellowled", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
-            new("edit_greenled", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+            new("edit_redled", "PLC.Vali_Siemens.led7", null, "HMI_DB.Traffic_Lights.Red_Time", DateTime.Now),
+            new("edit_yellowled", "PLC.Vali_Siemens.led7", null, "HMI_DB.Traffic_Lights.Yellow_Time", DateTime.Now),
+            new("edit_greenled", "PLC.Vali_Siemens.led7", null, "HMI_DB.Traffic_Lights.Green_Time", DateTime.Now),
 
-            new("start_trafficlight", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
-            new("stop_trafficlight", "PLC.Vali_Siemens.led7", null, "_IO_EM_DO_07", DateTime.Now),
+             new("confirm_trafficlight", "PLC.Vali_Siemens.led7", null, "HMI_DB.Traffic_Lights.Confirm", DateTime.Now),
+            new("start_trafficlight", "PLC.Vali_Siemens.led7", null, "HMI_DB.Traffic_Lights.Start", DateTime.Now),
+            new("stop_trafficlight", "PLC.Vali_Siemens.led7", null, "HMI_DB.Traffic_Lights.Stop", DateTime.Now),
 
             //Inverter
-            new("start", "PLC.Vali_Siemens.led7", null, "HMI_DB.Inverter.Start", DateTime.Now),
-            new("stop", "PLC.Vali_Siemens.led7", null, "HMI_DB.Inverter.Stop", DateTime.Now),
+            new("start_inverter", "PLC.Vali_Siemens.led7", null, "HMI_DB.Inverter.Start", DateTime.Now),
+            new("stop_inverter", "PLC.Vali_Siemens.led7", null, "HMI_DB.Inverter.Stop", DateTime.Now),
             new("setpoint", "PLC.Inverter.setpoint", null, "HMI_DB.Inverter.Speed_SP", DateTime.Now),
             new("speed", "PLC.Inverter.speed", null, "HMI_DB.Inverter.Speed_PV", DateTime.Now),
             new("forward", "PLC.Inverter.setpoint", null, "HMI_DB.Inverter.Fwd", DateTime.Now),
@@ -127,9 +129,11 @@ namespace DemoCaseGui.Core.Application.Communication
             switch (tem)
             {
                 case "True":
-                    value =true; break;
+                    value = true; break;
                 case "False":
-                    value =false; break;
+                    value = false; break;
+                case null:
+                    value = tem; break;
                 default:
                     value = double.Parse(tem); break;
             }  
@@ -159,7 +163,7 @@ namespace DemoCaseGui.Core.Application.Communication
 
         public void Connect()
         {
-           _timer.Enabled= true;
+            _timer.Enabled = true;
         }
     }
 }

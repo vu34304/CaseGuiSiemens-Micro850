@@ -58,27 +58,37 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
         //Command
         public ICommand ConnectCommand { get; set; }
-        public ICommand ResolutionOKCommand { get; set; }
         public ICommand MotorSetpointOKCommand { get; set; }
-        public ICommand SpeedOKCommand { get; set; }
-        public ICommand PositionOKCommand { get; set; }
         public ICommand StartTrafficLightsCommand { get; set; }
         public ICommand StopTrafficLightsCommand { get; set; }
+        public ICommand StartInverterCommand { get; set; }
+        public ICommand StopInverterCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
+        public ICommand ForwardCommand { get; set; }
+        public ICommand ReverseCommand { get; set; }
 
         public CaseMicroViewModel()
         {
             _Micro850Client = new Micro850Client();
             _mqttClient = new MqttClient();
-            _timer = new Timer(300);
+            _timer = new Timer(500);
             _timer.Elapsed += _timer_Elapsed;
             Value = new ChartValues<double> { };
 
             //Button Command
-            MotorSetpointOKCommand = new RelayCommand(WriteMotorSetpoint);
             ConnectCommand = new RelayCommand(Connect);
+            //Traffic Light
             StartTrafficLightsCommand = new RelayCommand(Start_TrafficLight);
             StopTrafficLightsCommand = new RelayCommand(Stop_TrafficLight);
+            ConfirmCommand = new RelayCommand(ConfirmTrafficLight);
+
+            //Inverter
+            MotorSetpointOKCommand = new RelayCommand(WriteMotorSetpoint);           
+            StartInverterCommand = new RelayCommand(Start_Inverter);
+            StopInverterCommand = new RelayCommand(Stop_Inverter);
+            ForwardCommand = new RelayCommand(Forward_Inverter);
+            ReverseCommand = new RelayCommand(Reverse_Inverter);
+
 
         }
 
@@ -86,27 +96,28 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
         private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
-           //TrafficLight
+            //TrafficLight
             Led2 = (bool?)_Micro850Client.GetTagValue("led2");
             Led3 = (bool?)_Micro850Client.GetTagValue("led3");
             Led4 = (bool?)_Micro850Client.GetTagValue("led4");
             Led5 = (bool?)_Micro850Client.GetTagValue("led5");
             Led6 = (bool?)_Micro850Client.GetTagValue("led6");
-            Led7 = (bool?)_Micro850Client.GetTagValue("led7");  
-
-
+            Led7 = (bool?)_Micro850Client.GetTagValue("led7");
+            Edit_RedLed = (double?)_Micro850Client.GetTagValue("edit_redled");
+            Edit_YellowLed = (double?)_Micro850Client.GetTagValue("edit_yellowled");
+            Edit_GreenLed = (double?)_Micro850Client.GetTagValue("edit_greenled");
             //Inverter
-            Start = (bool?)_Micro850Client.GetTagValue("start");
-            Stop = (bool?)_Micro850Client.GetTagValue("stop");
+            Start = (bool?)_Micro850Client.GetTagValue("start_inverter");
+            Stop = (bool?)_Micro850Client.GetTagValue("stop_inverter");
             MotorForward1 = (bool?)_Micro850Client.GetTagValue("forward");
             MotorReverse1 = (bool?)_Micro850Client.GetTagValue("reverse");
 
-            if(MotorForward1 is true)
+            if (MotorForward1 is true)
             {
                 MotorForward = true;
                 MotorReverse = false;
             }
-            else if(MotorReverse is true)
+            else if (MotorReverse is true)
             {
                 MotorForward = false;
                 MotorReverse = true;
@@ -130,7 +141,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             {
                 MotorSpeed = (double?)_Micro850Client.GetTagValue("speed");
                 Value.Add((double)_Micro850Client.GetTagValue("speed"));
-                if(Value.Count() >10) Value.RemoveAt(0);
+                if (Value.Count() > 10) Value.RemoveAt(0);
             }
             speed_old = (double?)_Micro850Client.GetTagValue("speed");
 
@@ -151,18 +162,19 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _timer.Enabled = true;
         }
 
+        //TrafficLights
         public void Start_TrafficLight()
         {
             _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("start_trafficlight"),true);
             Thread.Sleep(1000);
-            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("stop_trafficlight"), false);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("start_trafficlight"), false);
         }
 
         public void Stop_TrafficLight() 
         {
-            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("Stop_TrafficLight"), true);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("stop_trafficlight"), true);
             Thread.Sleep(1000);
-            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("Stop_TrafficLight"), false);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("stop_trafficlight"), false);
         }
 
         public void ConfirmTrafficLight()
@@ -170,6 +182,40 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("edit_redled"), Edit_RedLed);
             _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("edit_yellowled"), Edit_YellowLed);
             _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("edit_greenled"), Edit_YellowLed);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("confirm_trafficlight"), true);
+            Thread.Sleep(1000);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("confirm_trafficlight"), false);
+            //confirm ?
+        }
+
+        //Inverter
+
+        public void Start_Inverter()
+        {
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("start_inverter"), true);
+            Thread.Sleep(1000);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("start_inverter"), false);
+        }
+
+        public void Stop_Inverter()
+        {
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("stop_inverter"), true);
+            Thread.Sleep(1000);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("stop_inverter"), false);
+        }
+
+        public void Forward_Inverter()
+        {
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("forward"), true);
+            Thread.Sleep(1000);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("forward"), false);
+        }
+
+        public void Reverse_Inverter()
+        {
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("reverse"), true);
+            Thread.Sleep(1000);
+            _Micro850Client.WritePLC(_Micro850Client.GetTagAddress("reverse"), false);
         }
     }
 }
