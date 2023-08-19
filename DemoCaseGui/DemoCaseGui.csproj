@@ -39,10 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DemoCaseGui.Core\DemoCaseGui.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="logo-101.png" />
     <Resource Include="Resources\Images\al2330.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -66,6 +62,10 @@
 
   <ItemGroup>
     <_DeploymentManifestIconFile Remove="Resources\Images\logo-101.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DemoCaseGui.Core\DemoCaseGui.Core.csproj" />
   </ItemGroup>
 
 </Project>

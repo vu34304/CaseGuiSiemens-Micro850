@@ -32,8 +32,8 @@
         </Button>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0.8*"/>
             </Grid.ColumnDefinitions>
 
             <!--TrafficLight-->
@@ -49,27 +49,30 @@
                     </Grid.ColumnDefinitions>
 
                     <materialDesign:Card Grid.Row="0"
-                    Grid.Column="0"       
-                    Height="330"
+                    Grid.Column="0"                       
                     Panel.ZIndex="1"
                     VerticalAlignment="Top"
-                    Margin="30,30,30,30" Grid.RowSpan="2">
+                    Margin="10,30,30,30" Grid.RowSpan="2">
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="71*"/>
+                                <ColumnDefinition Width="194*"/>
+                                <ColumnDefinition Width="0*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
+                            <TextBlock
                   Text="BẢNG ĐIỀU KHIỂN"
                   Style="{StaticResource ModuleTitle}"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"/>
+                  HorizontalAlignment="Left" Margin="52,0,0,0" Grid.ColumnSpan="2"/>
 
                             <Border Grid.Row="1" 
            Style="{StaticResource Frame}"
-           Margin="10"
+           Margin="10,10,10,10" Grid.ColumnSpan="2"
            >
                                 <Grid >
                                     <Grid.ColumnDefinitions>
@@ -98,7 +101,7 @@
                             </Border>
                             <Border Grid.Row="2"
            Style="{StaticResource Frame}"
-           Margin="10"
+           Margin="10,10,10,10" Grid.ColumnSpan="2"
            >
                                 <Grid  >
                                     <Grid.ColumnDefinitions>
@@ -163,43 +166,143 @@
 
                                 </Grid>
                             </Border>
+
                             <Button     
-                       Grid.Row="3"
-                       Margin="10"                        
-                       Command="{Binding ConfirmCommand}" 
+Grid.Row="5"
+Margin="62,10,53,10"                        
+Command="{Binding ConfirmTrafficLights_Command}" 
+Background="#e6a825"
+Style="{StaticResource MaterialDesignRaisedDarkButton}"
+materialDesign:ButtonAssist.CornerRadius="15" Width="125" Height="30">
+                                <TextBlock Text="XÁC NHẬN"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
+                            </Button>
+
+
+
+
+                        </Grid>
+                    </materialDesign:Card>
+                    <!--<materialDesign:Card Grid.Row="0"
+                    Grid.Column="1"                       
+                    Panel.ZIndex="1"
+                    VerticalAlignment="Top"
+                    Margin="70,30,10,0" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="265*"/>
+                                <ColumnDefinition Width="9*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                  Text="CÀI ĐẶT THÔNG SỐ"
+                  Style="{StaticResource ModuleTitle}"
+                  HorizontalAlignment="Left" Margin="52,0,0,0"/>
+
+
+                            <Border Grid.Row="2"
+           Style="{StaticResource Frame}"
+           Margin="10,10,1,10"
+           >
+                                <Grid  >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+
+
+                                    <TextBlock  Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Thời gian đèn đỏ:"
+                       Style="{StaticResource FieldTitle}"
+                       Margin="10 0 0 0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       />
+                                    <TextBox    Margin="10" 
+                       Width="50"
+                       TextAlignment="Center" 
+                       Text="{Binding Edit_RedLed, Mode=TwoWay}" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="0"
+                       Grid.Column="1" />
+
+                                    <TextBlock  Grid.Row="1"
+                       Grid.Column="0"
+                       Text="Thời gian đèn vàng:"
+                       Style="{StaticResource FieldTitle}"
+                        Margin="10 0 0 0 "
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"/>
+                                    <TextBox    Margin="10" 
+                       Width="50"
+                       TextAlignment="Center" 
+                       Text="{Binding Edit_YellowLed, Mode=TwoWay}" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="1"
+                       Grid.Column="1"/>
+
+                                    <TextBlock  Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Thời gian đèn xanh:"
+                       Style="{StaticResource FieldTitle}"
+                        Margin="10 0 0 0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"/>
+                                    <TextBox    Margin="10" 
+                       Width="50"
+                       TextAlignment="Center" 
+                       Text="{Binding Edit_GreenLed, Mode=TwoWay}" 
+                       HorizontalAlignment="Center"
+                       Grid.Row="2"
+                       Grid.Column="1"/>
+
+
+                                </Grid>
+                            </Border>
+
+                            <Button     
+                       Grid.Row="5"
+                       Margin="62,10,53,10"                        
+                       Command="{Binding ConfirmTrafficLights_Command}" 
                        Background="#e6a825"
                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                       materialDesign:ButtonAssist.CornerRadius="15" Width="150" Height="30">
+                       materialDesign:ButtonAssist.CornerRadius="15" Width="125" Height="30">
                                 <TextBlock Text="XÁC NHẬN"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
                             </Button>
 
                         </Grid>
-                    </materialDesign:Card>
-                    <!--<Grid Grid.ColumnSpan="2"                                      
-            Grid.RowSpan="2" Margin="144,39,-144,-38">
-          <Grid.Background>
-              <ImageBrush ImageSource="C:\Users\vu343\source\repos\desktop_vts_democasegui\DemoCaseGui\Resources\Images\NGA4 (1).png" 
-                          
-                          Stretch="fill"/>
-          </Grid.Background>
-      </Grid>-->
-                    <Grid Grid.ColumnSpan="2"
-              Grid.RowSpan="2">
+                    </materialDesign:Card>-->
+
+                    <Grid   Grid.ColumnSpan="2"
+                            Height="600"
+                            Width="600"
+                            Grid.RowSpan="2">
                         <Image 
-              Width="1000"
-                            
-              VerticalAlignment="Center"
-              HorizontalAlignment="Left"
-              Margin="60 50 50 50"
-              Source="C:\Users\vu343\source\repos\desktop_vts_democasegui\DemoCaseGui\Resources\Images\NGA4 (1).png" 
-              />
+                              Width="800"
+                              Margin="100 0 0 0"
+                              VerticalAlignment="Bottom"
+                              HorizontalAlignment="Center"                             
+                              Source="C:\Users\vu343\source\repos\desktop_vts_democasegui\DemoCaseGui\Resources\Images\NGA4 (1).png"/>
                         <Border 
-                   Width="100"
-                   Height="40"
-                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
-                  Margin="340 200 0 0"
-                   Style="{StaticResource Frame}">
+                            Width="100"
+                            Height="40"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Margin="180,0,0,105"
+                            Style="{StaticResource Frame}">
 
                             <StackPanel Orientation="Horizontal">
                                 <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
@@ -212,12 +315,12 @@
                         </Border>
 
                         <Border 
-                  Width="100"
-                  Height="40"
-                HorizontalAlignment="Right"
-                   VerticalAlignment="Bottom"
-                   Margin="0 0 100 200"
-                  Style="{StaticResource Frame}">
+                            Width="100"
+                            Height="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="top"
+                            Margin="0,310,120,0"
+                            Style="{StaticResource Frame}">
 
                             <StackPanel Orientation="Horizontal">
                                 <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
@@ -248,8 +351,8 @@
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
-                        <Grid Margin="0 30 30 0">
+                     
+                        <Grid Margin="0 30 0 0" Grid.RowSpan="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
@@ -312,11 +415,11 @@
                                             <TextBlock Text="Fwd"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
                                         </Button>
                                         <Button     
-Margin="10"                                 
-Command="{Binding ReverseCommand}" 
-Background="#e6a825"
-Style="{StaticResource MaterialDesignRaisedDarkButton}"
-materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
+                                            Margin="10"                                 
+                                            Command="{Binding ReverseCommand}" 
+                                            Background="#e6a825"
+                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
                                             <TextBlock Text="Rev"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
                                         </Button>
                                     </StackPanel>
@@ -324,28 +427,46 @@ materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
                                 </StackPanel>
                             </Border>
                         </Grid>
+                     
+                        <materialDesign:Card Grid.Column="1"  
+                                             Margin="0 0 10 0 ">
 
-                        <materialDesign:Card Grid.Column="1" Margin="0 ">
+
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="AUTO"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock>         
-                                <TextBlock Name="X"></TextBlock>
-                                <TextBlock Name="Y"></TextBlock>
-                            </TextBlock>
-                                <lvc:CartesianChart Grid.Row="1" Name="Chart" Zoom="Xy">
-                                    <lvc:CartesianChart.AxisX>
-                                        <lvc:Axis RangeChanged="Axis_OnRangeChanged" 
-                  RangeChangedCommand="{Binding RangeChangedCommand}"/>
-                                    </lvc:CartesianChart.AxisX>
-                                    <lvc:CartesianChart.Series>
-                                        <lvc:LineSeries Values="{Binding Value}"                              
-                        Fill="Transparent" StrokeThickness="4" 
-                        Panel.ZIndex="2" PointGeometrySize="25"/>
-                                    </lvc:CartesianChart.Series>
-                                </lvc:CartesianChart>
+                                <TextBlock Grid.Row="0"
+                               Text="ĐỒ THỊ BIỂU DIỄN TỐC ĐỘ ĐỘNG CƠ"
+                               Style="{StaticResource ModuleTitle}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="349*"/>
+                                        <ColumnDefinition Width="252*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock>                                    
+                                     <TextBlock Name="X"></TextBlock>
+                                     <TextBlock Name="Y"></TextBlock>
+                                 </TextBlock>
+                                    <lvc:CartesianChart Grid.Row="1" Name="Chart" Zoom="Xy" Grid.ColumnSpan="2">
+                                        <lvc:CartesianChart.AxisX>
+                                            <lvc:Axis RangeChanged="Axis_OnRangeChanged" 
+RangeChangedCommand="{Binding RangeChangedCommand}"/>
+                                        </lvc:CartesianChart.AxisX>
+                                        <lvc:CartesianChart.Series>
+                                            <lvc:LineSeries Values="{Binding Value}"                              
+      Fill="Transparent" StrokeThickness="4" 
+      Panel.ZIndex="2" PointGeometrySize="25"/>
+                                        </lvc:CartesianChart.Series>
+                                    </lvc:CartesianChart>
+                                </Grid>
                             </Grid>
                         </materialDesign:Card>
                     </Grid>
