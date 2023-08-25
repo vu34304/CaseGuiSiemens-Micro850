@@ -14,6 +14,7 @@ using S7.Net;
 using NPOI.XSSF.Streaming.Values;
 using System.Runtime.CompilerServices;
 
+
 namespace DemoCaseGui.Core.Application.Communication
 {
     public class Micro850Client

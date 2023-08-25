@@ -5,10 +5,12 @@ namespace DemoCaseGui.Core.Application.ViewModels;
 public class MainViewModel : BaseViewModel
 {
     public CaseViewModel CaseViewModel { get; set; }
+    public CaseMicroViewModel MicroViewModel { get; set; }
     public FilterViewModel FilterViewModel { get; set; }
-    public MainViewModel(CaseViewModel caseViewModel, FilterViewModel filterViewModel)
+    public MainViewModel(CaseViewModel caseViewModel, FilterViewModel filterViewModel , CaseMicroViewModel microViewModel)
     {
         CaseViewModel = caseViewModel;
         FilterViewModel = filterViewModel;
+        MicroViewModel = microViewModel;
     }
 }
