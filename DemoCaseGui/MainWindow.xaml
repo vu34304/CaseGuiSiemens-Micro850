@@ -11,7 +11,7 @@
         xmlns:components="clr-namespace:DemoCaseGui.Resources.Components" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
         WindowStartupLocation="CenterScreen"
-        Title="VTS Data Acquisition Application" Height="780" Width="1500" Icon="/logo-101.png">
+        Title="VTS Data Acquisition Application" Height="820" Width="1200" Icon="/logo-101.png">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -46,23 +46,33 @@
                 <local:CaseView/>
             </TabItem>
 
+           
             <TabItem Height="50" Width="auto" Padding="5">
                 <TabItem.Header>
                     <HeaderedContentControl  
                         Style="{StaticResource TabTitle}"
-                        Content="Report"
+                        Content="Micro850"
                         Padding="5"/>
                 </TabItem.Header>
-                <local:FilterView></local:FilterView>
+                <local:CaseMicroView Loaded="CaseMicroView_Loaded"></local:CaseMicroView>
             </TabItem>
             <TabItem Height="50" Width="auto" Padding="5">
                 <TabItem.Header>
                     <HeaderedContentControl  
-                        Style="{StaticResource TabTitle}"
-                        Content="Micro850Case"
-                        Padding="5"/>
+            Style="{StaticResource TabTitle}"
+            Content="CompactLogix"
+            Padding="5"/>
                 </TabItem.Header>
-                <local:CaseMicroView Loaded="CaseMicroView_Loaded"></local:CaseMicroView>
+                <local:CaseCompactLogix/>
+            </TabItem>
+            <TabItem Height="50" Width="auto" Padding="5">
+                <TabItem.Header>
+                    <HeaderedContentControl  
+             Style="{StaticResource TabTitle}"
+             Content="Report"
+             Padding="5"/>
+                </TabItem.Header>
+                <local:FilterView></local:FilterView>
             </TabItem>
         </TabControl>
     </Grid>

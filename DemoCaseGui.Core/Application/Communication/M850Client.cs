@@ -20,7 +20,7 @@ namespace DemoCaseGui.Core.Application.Communication
         {
             //Khoi tao PLC
             plc = new AllenBradleyMicroCip("192.168.1.50");
-            _timer = new Timer(100);
+            _timer = new Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
             Tags = new()
@@ -53,7 +53,7 @@ namespace DemoCaseGui.Core.Application.Communication
             new("speed", "PLC.Vali_Micro850.inverter_speed", null, "HMI_DB.Inverter.Speed_PV", DateTime.Now),
             new("forward", "PLC.Vali_Micro850.inverter_forward", null, "HMI_DB.Inverter.Fwd", DateTime.Now),
             new("reverse", "PLC.Vali_Micro850.inverter_reverse", null, "HMI_DB.Inverter.Rev", DateTime.Now),
-            new("confirm_inverter", "PLC.Vali_Micro850.led7", null, "HMI_DB.Inverter.Confirm", DateTime.Now),
+            new("confirm_inverter", "PLC.Vali_Micro850.inverter_confirm", null, "HMI_DB.Inverter.Confirm", DateTime.Now),
         };
         }
 
@@ -138,7 +138,8 @@ namespace DemoCaseGui.Core.Application.Communication
 
         public void WritePLC(string TagName, bool value)
         {
-            OperateResult write =  plc.Write(TagName, value);
+          
+            OperateResult write1 =  plc.Write(TagName, value);
           
         }
         public void WriteNumberPLC(string TagName, UInt16 value)

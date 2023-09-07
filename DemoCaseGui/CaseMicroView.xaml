@@ -12,9 +12,13 @@
              xmlns:viewmodels="clr-namespace:DemoCaseGui.Core.Application.ViewModels;assembly=DemoCaseGui.Core"           
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodels:CaseMicroViewModel}"
-             d:DesignHeight="660" d:DesignWidth="1500"
+             d:DesignHeight="660" d:DesignWidth="1200"
              Background="White">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="641*"/>
+            <ColumnDefinition Width="560*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
@@ -22,7 +26,7 @@
 
 
 
-        <Button Grid.Row="0" Margin="10" IsEnabled="{Binding IsConnected}" FontSize="24" Height="39.5">
+        <Button Grid.Row="0" Margin="10,10,10,10" IsEnabled="{Binding IsConnected}" FontSize="24" Height="39.5" Grid.ColumnSpan="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <prism:InvokeCommandAction Command="{Binding ConnectCommand}" />
@@ -30,9 +34,9 @@
             </i:Interaction.Triggers>
             Connect
         </Button>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -40,215 +44,214 @@
             <Grid >
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition  Height="auto"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" >
+                    <materialDesign:Card Grid.Row="0" Padding="10" Margin="10 0 10 0">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <materialDesign:Card Margin="10">
-                                <Grid >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0"
-                                       Text="BẢNG ĐIỀU KHIỂN"
-                                       Margin="10"
-                                       Style="{StaticResource ModuleTitle}"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                                    <Border Grid.Row="1" Style="{StaticResource Frame}"
-                                                        Padding="5"
-                                                        Margin="10">
-                                        <StackPanel Orientation="Vertical" >
-                                            <TextBlock Text="TrafficLights Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                            <StackPanel  HorizontalAlignment="Center">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button     
-                                                    Margin="10"                                 
-                                                    Command="{Binding StartInverterCommand}" 
-                                                    Background="#e6a825"
-                                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                                    materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
-                                                        <TextBlock Text="START"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                                    </Button>
-                                                    <Button     
-                                                        Margin="10"                                 
-                                                        Command="{Binding StopInverterCommand}" 
-                                                        Background="#e6a825"
-                                                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                                        materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
-                                                        <TextBlock Text="STOP"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                                    </Button>
-                                                </StackPanel>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Margin="10 0 10 0"
+Text="MÔ HÌNH ĐÈN GIAO THÔNG" 
+Style="{StaticResource ModuleTitle}"/>
 
-                                            </StackPanel>
+                            <Grid Grid.Row="1"  Width="600">
+                                <Image 
+            Width="800"           
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"     
+            Margin="20 0 0 -10"
+            Source="C:\Users\vu343\source\repos\desktop_vts_democasegui\DemoCaseGui\Resources\Images\NGA4 (1).png"/>
+                                <Border 
+              Height="60"                         
+              HorizontalAlignment="Left"
+              VerticalAlignment="Bottom"
+              Margin="140,0,0,90"
+              Style="{StaticResource Frame}">
+
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
+                State="{Binding Led2, Mode=TwoWay}"/>
+                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Yellow"
+                State="{Binding Led3, Mode=TwoWay}"/>
+                                            <components:Indicator Width="23" Height="23" Margin="5" 
+                State="{Binding Led4, Mode=TwoWay}"/>
 
                                         </StackPanel>
-                                    </Border>
-                                </Grid>
-                            </materialDesign:Card>
-                            <materialDesign:Card Grid.Column="1"
-                                                Margin="10">
-                                <Grid >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0"
-                                               Margin="10"
-                                   Text="CÀI ĐẶT THÔNG SỐ"                                              
-                                   Style="{StaticResource ModuleTitle}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                                    <Border Grid.Row="1"
-                                       Style="{StaticResource Frame}"
-                                       Margin="10,10,10,10" Grid.ColumnSpan="2"
-           >
-                                        <Grid  >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Time:" Style="{StaticResource FieldTitle}" Margin=" 10 0 0 0 "/>
+                                            <TextBlock Margin="10 0 0 0" Text="{Binding Time_Display_A, Mode=TwoWay}" Style="{StaticResource FieldTitle}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
 
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
+                                <Border     
+              Height="60"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Margin="0,95,160,0"
+              Style="{StaticResource Frame}">
 
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
+                        State="{Binding Led5, Mode=TwoWay}"/>
+                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Yellow"
+                        State="{Binding Led6, Mode=TwoWay}"/>
+                                            <components:Indicator Width="23" Height="23" Margin="5" 
+                        State="{Binding Led7, Mode=TwoWay}"/>
 
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Time:" Style="{StaticResource FieldTitle}" Margin="10 0 0 0"/>
+                                            <TextBlock Text="{Binding Time_Display_B, Mode=TwoWay}" Margin="10 0 0 0" Style="{StaticResource FieldTitle}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
 
-                                            <TextBlock  Grid.Row="0"
-                       Grid.Column="0"
-                       Text="Thời gian đèn đỏ cài đặt:"
-                       Style="{StaticResource FieldTitle}"
-                       Margin="10 0 0 0"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       />
-                                            <TextBox    Margin="10" 
-                       Width="50"
-                       TextAlignment="Center" 
-                       Text="{Binding Edit_RedLed, Mode=TwoWay}" 
-                       HorizontalAlignment="Center"
-                       Grid.Row="0"
-                       Grid.Column="1" />
-
-                                            <TextBlock  Grid.Row="1"
-                       Grid.Column="0"
-                       Text="Thời gian đèn vàng cài đặt:"
-                       Style="{StaticResource FieldTitle}"
-                        Margin="10 0 0 0 "
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"/>
-                                            <TextBox    Margin="10" 
-                       Width="50"
-                       TextAlignment="Center" 
-                       Text="{Binding Edit_YellowLed, Mode=TwoWay}" 
-                       HorizontalAlignment="Center"
-                       Grid.Row="1"
-                       Grid.Column="1"/>
-
-                                            <TextBlock  Grid.Row="2"
-                       Grid.Column="0"
-                       Text="Thời gian đèn xanh cài đặt:"
-                       Style="{StaticResource FieldTitle}"
-                        Margin="10 0 0 0"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"/>
-                                            <TextBox    Margin="10" 
-                       Width="50"
-                       TextAlignment="Center" 
-                       Text="{Binding Edit_GreenLed, Mode=TwoWay}" 
-                       HorizontalAlignment="Center"
-                       Grid.Row="2"
-                       Grid.Column="1"/>
-
-
-                                        </Grid>
-                                    </Border>
-                                    <Button     
-                                        Grid.Row="2"   
-                                        Margin="10"
-                                        Command="{Binding ConfirmTrafficLights_Command}" 
-                                        Background="#e6a825"
-                                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                        materialDesign:ButtonAssist.CornerRadius="15" Width="125" Height="30">
-                                        <TextBlock Text="XÁC NHẬN"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                    </Button>
-                                </Grid>
-                            </materialDesign:Card>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </materialDesign:Card>
 
-                    <materialDesign:Card  Grid.Row="1"
-                                          Margin="10"
-                                          >
+                    <materialDesign:Card Grid.Row="1" Margin="10">
                         <Grid>
-                            <Image 
-                                Width="600"
-                                Margin="40 0 0 0"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Center"                             
-                                Source="C:\Users\vu343\source\repos\desktop_vts_democasegui\DemoCaseGui\Resources\Images\NGA4 (1).png"/>
-                            <Border 
-                                  Height="60"                         
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Bottom"
-                                  Margin="160,0 , 0 ,50"
-                                  Style="{StaticResource Frame}">
 
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
-                                    State="{Binding Led2, Mode=TwoWay}"/>
-                                        <components:Indicator Width="23" Height="23" Margin="5" OnColor="Yellow"
-                                    State="{Binding Led3, Mode=TwoWay}"/>
-                                        <components:Indicator Width="23" Height="23" Margin="5" 
-                                    State="{Binding Led4, Mode=TwoWay}"/>
-
+                            <StackPanel Orientation="Horizontal" Grid.Row="1"
+ HorizontalAlignment="Center">
+                                <Border Grid.Row="1" Style="{StaticResource Frame}"
+                                       
+         Padding="5"
+         Margin="10">
+                                    <StackPanel Orientation="Vertical" Width="150">
+                                        <TextBlock Text="Traffic Lights Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <components:Indicator Width="23" Height="23" Margin="5" 
+                                   State="{Binding ButtonStartup, Mode=TwoWay}"/>
+                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
+                                   State="{Binding ButtonStop, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                            <Button Margin="5 0" Content="ON" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <prism:InvokeCommandAction Command="{Binding Start_TrafficLights}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                            <Button Margin="5 0" Content="OFF" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <prism:InvokeCommandAction Command="{Binding Stop_TrafficLights}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Time:" Style="{StaticResource FieldTitle}" Margin=" 10 0 0 0 "/>
-                                        <TextBlock Margin="10 0 0 0" Text="{Binding Time_Display_A, Mode=TwoWay}" Style="{StaticResource FieldTitle}"/>
+                                </Border>
+
+                                <Border Grid.Row="1"
+                            Style="{StaticResource Frame}"
+
+                            Margin="10" Grid.ColumnSpan="2"
+>
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="1"  >
+                                            <Grid  >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+
+
+
+                                                <TextBlock  Grid.Row="0"
+            Grid.Column="0"
+            Text="Thời gian đèn đỏ cài đặt:"
+            Style="{StaticResource FieldTitle}"
+            Margin="10 0 0 0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            />
+                                                <TextBox    Margin="10" 
+            Width="50"
+            TextAlignment="Center" 
+            Text="{Binding Edit_RedLed, Mode=TwoWay}" 
+            HorizontalAlignment="Center"
+            Grid.Row="0"
+            Grid.Column="1" />
+
+                                                <TextBlock  Grid.Row="1"
+            Grid.Column="0"
+            Text="Thời gian đèn vàng cài đặt:"
+            Style="{StaticResource FieldTitle}"
+             Margin="10 0 0 0 "
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"/>
+                                                <TextBox    Margin="10" 
+            Width="50"
+            TextAlignment="Center" 
+            Text="{Binding Edit_YellowLed, Mode=TwoWay}" 
+            HorizontalAlignment="Center"
+            Grid.Row="1"
+            Grid.Column="1"/>
+
+                                                <TextBlock  Grid.Row="2"
+            Grid.Column="0"
+            Text="Thời gian đèn xanh cài đặt:"
+            Style="{StaticResource FieldTitle}"
+             Margin="10 0 0 0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"/>
+                                                <TextBox    Margin="10" 
+            Width="50"
+            TextAlignment="Center" 
+            Text="{Binding Edit_GreenLed, Mode=TwoWay}" 
+            HorizontalAlignment="Center"
+            Grid.Row="2"
+            Grid.Column="1"/>
+
+
+                                            </Grid>
+                                        </Grid>
+
+                                    </Grid>
+
+                                </Border>
+                                <Border Grid.Row="1" Style="{StaticResource Frame}"
+                              
+Padding="5"
+Margin="10">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="Xác nhận thông số" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
+                                        <Button Margin="5 0" Content="CONFIRM" Padding="0" Width="70" Height="20" Grid.Column="3" Grid.Row="0">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <prism:InvokeCommandAction Command="{Binding ConfirmTrafficLights_Command}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
                                     </StackPanel>
-                                </StackPanel>
-                            </Border>
-
-                            <Border     
-                                  Height="60"
-                                  HorizontalAlignment="Right"
-                                  VerticalAlignment="Top"
-                                  Margin="0,50,145,0"
-                                  Style="{StaticResource Frame}">
-
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
-                                            State="{Binding Led5, Mode=TwoWay}"/>
-                                        <components:Indicator Width="23" Height="23" Margin="5" OnColor="Yellow"
-                                            State="{Binding Led6, Mode=TwoWay}"/>
-                                        <components:Indicator Width="23" Height="23" Margin="5" 
-                                            State="{Binding Led7, Mode=TwoWay}"/>
-
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Time:" Style="{StaticResource FieldTitle}" Margin="10 0 0 0"/>
-                                        <TextBlock Text="{Binding Time_Display_B, Mode=TwoWay}" Margin="10 0 0 0" Style="{StaticResource FieldTitle}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-
+                                </Border>
+                            </StackPanel>
                         </Grid>
                     </materialDesign:Card>
 
@@ -270,84 +273,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <materialDesign:Card Grid.Row="0" Margin="10">
-                            <Grid  >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0"
-                                            Text="BẢNG ĐIỀU KHIỂN"
-                                            Margin="10"
-                                             Style="{StaticResource ModuleTitle}"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
-                              Padding="5"
-                              Margin="10">
-                                    <StackPanel Orientation="Vertical" >
-                                        <TextBlock Text="Motor Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                        <StackPanel  HorizontalAlignment="Center">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Button     
-                      Margin="10"                                 
-                      Command="{Binding StartInverterCommand}" 
-                      Background="#e6a825"
-                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                      materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
-                                                    <TextBlock Text="START"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                                </Button>
-                                                <Button     
-                          Margin="10"                                 
-                          Command="{Binding StopInverterCommand}" 
-                          Background="#e6a825"
-                          Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                          materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
-                                                    <TextBlock Text="STOP"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                                </Button>
-                                            </StackPanel>
-                                            <Button     
-                      Margin="10"                                 
-                      Command="{Binding DeleteCommand}" 
-                      Background="#e6a825"
-                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                      materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
-                                                <TextBlock Text="JOD"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                            </Button>
-                                        </StackPanel>
 
-                                    </StackPanel>
-                                </Border>
-
-                                <Border Grid.Row="2" Style="{StaticResource Frame}"
-                                  Padding="5"
-                                  Margin="10">
-                                    <StackPanel Orientation="Vertical" >
-                                        <TextBlock Text="Motor Direction" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button     
-                      Margin="10"                                 
-                      Command="{Binding ForwardCommand}" 
-                      Background="#e6a825"
-                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                      materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
-                                                <TextBlock Text="Fwd"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                            </Button>
-                                            <Button     
-                      Margin="10"                                 
-                      Command="{Binding ReverseCommand}" 
-                      Background="#e6a825"
-                      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                      materialDesign:ButtonAssist.CornerRadius="15" Width="90" Height="30">
-                                                <TextBlock Text="Rev"  FontSize="16" FontWeight="Bold" Foreground="Black"/>
-                                            </Button>
-                                        </StackPanel>
-
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </materialDesign:Card>
 
                         <materialDesign:Card Grid.Column="1"  
                                              Margin="10 ">
@@ -373,72 +299,106 @@
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <TextBlock>                                    
-                                     <TextBlock Name="X"></TextBlock>
-                                     <TextBlock Name="Y"></TextBlock>
-                                 </TextBlock>
+    <TextBlock Name="X"></TextBlock>
+    <TextBlock Name="Y"></TextBlock>
+</TextBlock>
                                     <lvc:CartesianChart Grid.Row="1" Name="Chart" Zoom="Xy" Grid.ColumnSpan="2">
                                         <lvc:CartesianChart.AxisX>
                                             <lvc:Axis RangeChanged="Axis_OnRangeChanged" 
-RangeChangedCommand="{Binding RangeChangedCommand}"/>
+                                            RangeChangedCommand="{Binding RangeChangedCommand}"/>
                                         </lvc:CartesianChart.AxisX>
                                         <lvc:CartesianChart.Series>
                                             <lvc:LineSeries Values="{Binding Value}"                              
-      Fill="Transparent" StrokeThickness="4" 
-      Panel.ZIndex="2" PointGeometrySize="25"/>
+                                              Fill="Transparent" StrokeThickness="4" 
+                                              Panel.ZIndex="2" PointGeometrySize="25"/>
                                         </lvc:CartesianChart.Series>
                                     </lvc:CartesianChart>
+
+
                                 </Grid>
                             </Grid>
                         </materialDesign:Card>
                     </Grid>
 
-                    <materialDesign:Card Grid.Row="4" Padding="10" Margin="10">
+                    <materialDesign:Card Grid.Row="3" Padding="10" Margin="10">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"
-                                       Text="Inverter Kit" 
-                                       Style="{StaticResource ModuleTitle}"/>
+                Text="Inverter Kit" 
+                Style="{StaticResource ModuleTitle}"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1"
-                                        HorizontalAlignment="Center">
+                 HorizontalAlignment="Center">
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
-                                                Padding="5"
-                                                Margin="10">
+                         Padding="5"
+                         Margin="10">
                                     <StackPanel Orientation="Vertical" Width="120">
                                         <TextBlock Text="Motor Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <components:Indicator Width="23" Height="23" Margin="5" 
-                                                                          State="{Binding ButtonStartup, Mode=TwoWay}"/>
+                                                   State="{Binding ButtonStartup, Mode=TwoWay}"/>
                                             <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
-                                                                          State="{Binding ButtonStop, Mode=TwoWay}"/>
+                                                   State="{Binding ButtonStop, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                            <Button Margin="5 0" Content="ON" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <prism:InvokeCommandAction Command="{Binding Start_Inverter_Command}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                            <Button Margin="5 0" Content="OFF" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <prism:InvokeCommandAction Command="{Binding Stop_Inverter_Command}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
 
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
-                                                Padding="5"
-                                                Margin="10">
+                         Padding="5"
+                         Margin="10">
                                     <StackPanel Orientation="Vertical" Width="120">
                                         <TextBlock Text="Motor Direction" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <components:Indicator Width="23" Height="23" Margin="5 5 13 5" OnColor="Yellow" 
-                                                                          State="{Binding MotorForward, Mode=TwoWay}"/>
+                                                   State="{Binding MotorForward, Mode=TwoWay}"/>
                                             <components:Indicator Width="23" Height="23" Margin="13 5 5 5" OnColor="Yellow" 
-                                                                          State="{Binding MotorReverse, Mode=TwoWay}"/>
+                                                   State="{Binding MotorReverse, Mode=TwoWay}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Forward" HorizontalAlignment="Center" Margin="5"/>
                                             <TextBlock Text="Reverse" HorizontalAlignment="Center" Margin="5"/>
                                         </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                                            <Button Margin="5 0" Content="FWD" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <prism:InvokeCommandAction Command="{Binding ForwardCommand}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                            <Button Margin="5 0" Content="REV" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Click">
+                                                        <prism:InvokeCommandAction Command="{Binding ReverseCommand}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Button>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
 
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
-                                                Padding="5"
-                                                Margin="10">
+                         Padding="5"
+                         Margin="10">
                                     <StackPanel Orientation="Vertical" Width="180">
                                         <TextBlock Text="Motor" Style="{StaticResource FieldTitle}"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -476,7 +436,6 @@ RangeChangedCommand="{Binding RangeChangedCommand}"/>
                             </StackPanel>
                         </Grid>
                     </materialDesign:Card>
-
 
                 </Grid>
             </Grid>

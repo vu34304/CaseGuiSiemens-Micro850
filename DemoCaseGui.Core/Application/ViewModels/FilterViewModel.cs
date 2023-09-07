@@ -16,14 +16,20 @@ namespace DemoCaseGui.Core.Application.ViewModels
     public class FilterViewModel : BaseViewModel
     {
         private readonly S7Client _s7Client;
+        private readonly M850Client _m850Client;
+        private readonly CPLogixClient _CPLogixClient;
         private readonly ValiIfmLogRepository valiIfmLogRepository;
         private readonly InverterLogRepository inverterLogRepository;
         private readonly ValiSiemensLogRepository valiSiemensLogRepository;
+        private readonly ValiMicroLogRepository valiMicroLogRepository;
+        private readonly ValiCompactLogRepository valiCompactLogRepository;
         private readonly IExcelExporter _excelExporter;
 
         public ObservableCollection<FilterEntry> Entries { get; set; } = new();
         public TimeRangeQuery TimeRange { get; set; } = new();
         private string tagname = "";
+        private string tagname1 = "";
+        private string tagname2 = "";
         public string Tagname 
         { 
             get { return tagname; } 
@@ -33,19 +39,49 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 var tag = _s7Client.Tags.First(i => i.dbname == tagname);
             }
         }
+
+        public string Tagname1
+        {
+            get { return tagname1; }
+            set
+            {
+                tagname1 = value;
+                var tag = _m850Client.Tags.First(i => i.dbname == tagname1);
+            }
+        }
+
+        public string Tagname2
+        {
+            get { return tagname2; }
+            set
+            {
+                tagname2 = value;
+                var tag = _CPLogixClient.Tags.First(i => i.dbname == tagname2);
+            }
+        }
+
         public ObservableCollection<string> Tagnames { get; set; } = new();
+
+     
 
         public ICommand FilterCommand { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
         public FilterViewModel()
         {
             _s7Client = new S7Client();
+            _m850Client = new M850Client();
+            _CPLogixClient = new CPLogixClient();
             _excelExporter = new ExcelExporter();
             valiIfmLogRepository = new ValiIfmLogRepository();
             inverterLogRepository = new InverterLogRepository();
-            valiSiemensLogRepository = new ValiSiemensLogRepository();  
+            valiSiemensLogRepository = new ValiSiemensLogRepository();
+            valiMicroLogRepository = new ValiMicroLogRepository();
+            valiCompactLogRepository = new ValiCompactLogRepository();
+            
 
-            Tagnames = new ObservableCollection<string>(_s7Client.Tags.Select(i => i.dbname).OrderBy(s => s));
+
+            Tagnames = new ObservableCollection<string>(_s7Client.Tags.Select(i => i.dbname).Concat(_m850Client.Tags.Select(i => i.dbname)).Concat(_CPLogixClient.Tags.Select(i => i.dbname)).OrderBy(s => s));
+
             FilterCommand = new RelayCommand(LoadAsync);
             ExportToExcelCommand = new RelayCommand<string>(ExportToExcel);
         }
@@ -56,6 +92,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 var valiIfmLog = await valiIfmLogRepository.GetListAsync(TimeRange,Tagname);
                 var inverterLog = await inverterLogRepository.GetListAsync(TimeRange,Tagname);
                 var valiSiemensLog = await valiSiemensLogRepository.GetListAsync(TimeRange, Tagname);
+                var valiMicroLog = await valiMicroLogRepository.GetListAsync(TimeRange, Tagname1);
+                var valiCompactLog = await valiCompactLogRepository.GetListAsync(TimeRange, Tagname2);
 
                 var entriesvaliIfmLog = valiIfmLog.Select(e => new FilterEntry(
                     e.Name, 
@@ -72,6 +110,15 @@ namespace DemoCaseGui.Core.Application.ViewModels
                     e.Name,
                     e.Timestamp,
                     e.Value)).ToList();
+                var entriesvaliMicroLog = valiMicroLog.Select(e => new FilterEntry(
+                   e.Name,
+                   e.Timestamp,
+                   e.Value)).ToList();
+
+                var entriesvaliCompactLog = valiCompactLog.Select(e => new FilterEntry(
+                  e.Name,
+                  e.Timestamp,
+                  e.Value)).ToList();
 
                 List<FilterEntry> filters = new();
                 foreach (var entry in entriesvaliIfmLog )
@@ -83,6 +130,14 @@ namespace DemoCaseGui.Core.Application.ViewModels
                     filters.Add(entry);
                 }
                 foreach (var entry in entriesvaliSiemensLog)
+                {
+                    filters.Add(entry);
+                }
+                foreach (var entry in entriesvaliMicroLog)
+                {
+                    filters.Add(entry);
+                }
+                foreach (var entry in entriesvaliCompactLog)
                 {
                     filters.Add(entry);
                 }

@@ -11,21 +11,23 @@ using System.Windows.Input;
 using LiveCharts;
 using Timer = System.Timers.Timer;
 using MqttClient = DemoCaseGui.Core.Application.Communication.MqttClient;
-using AutomatedSolutions.ASCommStd.AB.Logix.Data;
 using NPOI.SS.Formula.Functions;
 using static NPOI.HSSF.Util.HSSFColor;
+using System.ComponentModel;
+using HslCommunication.Profinet.XINJE;
+using System;
+using System.Windows;
 
 namespace DemoCaseGui.Core.Application.ViewModels
 {
 
-    public class CaseMicroViewModel : BaseViewModel
+    public class CaseMicroViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private readonly M850Client _Micro850Client;
         private readonly MqttClient _mqttClient;
         private readonly Timer _timer;
         public bool IsMqttConnected => _mqttClient.IsConnected;
         public ChartValues<float> Value { get; set; }
-
         //TrafficLight
 
         public bool? Led2 { get; set; }
@@ -82,8 +84,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public CaseMicroViewModel()
         {
             _Micro850Client = new M850Client();
-            _mqttClient = new MqttClient();
-            _timer = new Timer(50);
+            _timer = new Timer(500);
             _timer.Elapsed += _timer_Elapsed;
             Value = new ChartValues<float> { };
 
@@ -100,6 +101,9 @@ namespace DemoCaseGui.Core.Application.ViewModels
             StopInverterCommand = new RelayCommand(Stop_Inverter);
             ForwardCommand = new RelayCommand(Forward_Inverter);
             ReverseCommand = new RelayCommand(Reverse_Inverter);
+
+            
+
         }
 
 
@@ -231,7 +235,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             {
                 MotorSpeed = (float?)_Micro850Client.GetTagValue("speed");
                 float   MotorSpeed1 = (float)_Micro850Client.GetTagValue("speed");
-                if (Value.Count() == 0 || Value.Count() < 15)
+                if ( Value.Count() < 15)
                 {                
                         Value.Add(MotorSpeed1);
                 }

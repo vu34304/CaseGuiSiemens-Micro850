@@ -15,6 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ScottPlot;
+using System.Windows.Threading;
+using DemoCaseGui.Core.Application.ViewModels;
 
 namespace DemoCaseGui
 {
@@ -23,11 +26,17 @@ namespace DemoCaseGui
     /// </summary>
     public partial class CaseMicroView : UserControl
     {
+
+        private CaseMicroView microView;
+
         public CaseMicroView()
         {
             InitializeComponent();
-            DataContext = new Core.Application.ViewModels.CaseMicroViewModel(); 
+            DataContext = new Core.Application.ViewModels.CaseMicroViewModel();
+       
         }
+
+        
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
