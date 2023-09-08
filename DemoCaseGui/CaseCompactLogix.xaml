@@ -63,22 +63,22 @@
                                     <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
 
-                                <Border Grid.Row="0" Margin="10 20 10 10" Style="{StaticResource Frame}">
+                                <Border Grid.Row="0" Margin="10 20 10 25" Style="{StaticResource Frame}">
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="O5D 150" Style="{StaticResource FieldTitle}"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="{Binding DEVICE_O5D_150, StringFormat=N2}"/>
-                                            <TextBlock Text="Cm"/>
+                                            <TextBlock Text=" cm"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
-                                <Border Grid.Row="1" Margin="10 20 10 10" Style="{StaticResource Frame}">
+                                <Border Grid.Row="1" Margin="10 20 10 20" Style="{StaticResource Frame}">
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="KI6000" Style="{StaticResource FieldTitle}"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-                                                              State="{Binding DEVICE_KI6000, Mode=TwoWay}"/>
+                                           
+                                            <TextBlock Text="{Binding DEVICE_KI6000, StringFormat=N2}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
@@ -91,11 +91,7 @@
                                             <!--, StringFormat=N3-->
                                             <TextBlock Text=" mm"/>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-                                                              State="{Binding UGT524Status, Mode=TwoWay}"/>
-                                        </StackPanel>
+                                        
                                     </StackPanel>
                                 </Border>
                             </Grid>
@@ -275,20 +271,22 @@
         Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical" >
-                                            <TextBlock Text="Traffic Lights" Margin="5" Style="{StaticResource FieldTitle}"/>
+                                            <TextBlock Text=" Lights" Margin="5" Style="{StaticResource FieldTitle}"/>
                                             <StackPanel Orientation="Horizontal">
-                                                <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" OnColor="Red" Margin="5" State="{Binding DO1, Mode=TwoWay}"/>
                                                 <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" Margin="5" State="{Binding XANH1, Mode=TwoWay}"/>
                                                 <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" OnColor="Yellow" Margin="5" State="{Binding VANG1, Mode=TwoWay}"/>
-
+                                                <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" OnColor="Red" Margin="5" State="{Binding DO1, Mode=TwoWay}"/>
+                                                
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" >
                                                 <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" OnColor="Red" Margin="5" State="{Binding DO2, Mode=TwoWay}"/>
-                                                <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" Margin="5" State="{Binding XANH2, Mode=TwoWay}"/>
-                                                <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" OnColor="Yellow" Margin="5" State="{Binding VANG2, Mode=TwoWay}"/>
+                                                <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" OnColor="Yellow" Margin="5" State="{Binding XANH2, Mode=TwoWay}"/>
+                                                <components:Indicator Grid.Row="3" Grid.Column="0" Width="23" Height="23" Margin="5" State="{Binding VANG2, Mode=TwoWay}"/>
+                                                
                                             </StackPanel>
                                         </StackPanel>
                                     </Border>
+                                
                                     <Border Grid.Row="1" Style="{StaticResource Frame}"
                 Padding="5"
                 Margin="10">
@@ -388,7 +386,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
+                                <!--<Border Grid.Row="1" Style="{StaticResource Frame}"
                                             Padding="5"
                                             Margin="10">
                                     <StackPanel Orientation="Vertical" Width="120">
@@ -403,8 +401,15 @@
                                             <TextBlock Text="Forward" HorizontalAlignment="Center" Margin="5"/>
                                             <TextBlock Text="Reverse" HorizontalAlignment="Center" Margin="5"/>
                                         </StackPanel>
+                                        <Button Margin="5 0" Content="ĐẢO CHIỀU" Padding="0" Width="80" Height="20" Grid.Column="3" Grid.Row="0">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <prism:InvokeCommandAction Command="{Binding Forward_Inverter_Command}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Button>
                                     </StackPanel>
-                                </Border>
+                                </Border>-->
 
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
                                             Padding="5"

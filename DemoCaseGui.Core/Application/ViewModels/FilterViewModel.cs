@@ -28,37 +28,17 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ObservableCollection<FilterEntry> Entries { get; set; } = new();
         public TimeRangeQuery TimeRange { get; set; } = new();
         private string tagname = "";
-        private string tagname1 = "";
-        private string tagname2 = "";
         public string Tagname 
         { 
             get { return tagname; } 
             set 
             { 
                 tagname = value; 
-                var tag = _s7Client.Tags.First(i => i.dbname == tagname);
+                var tag = _s7Client.Tags.First(i => i.dbname == tagname);             
             }
         }
 
-        public string Tagname1
-        {
-            get { return tagname1; }
-            set
-            {
-                tagname1 = value;
-                var tag = _m850Client.Tags.First(i => i.dbname == tagname1);
-            }
-        }
-
-        public string Tagname2
-        {
-            get { return tagname2; }
-            set
-            {
-                tagname2 = value;
-                var tag = _CPLogixClient.Tags.First(i => i.dbname == tagname2);
-            }
-        }
+      
 
         public ObservableCollection<string> Tagnames { get; set; } = new();
 

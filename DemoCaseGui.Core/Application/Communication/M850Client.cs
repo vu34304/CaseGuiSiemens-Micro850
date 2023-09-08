@@ -15,6 +15,7 @@ namespace DemoCaseGui.Core.Application.Communication
         private readonly AllenBradleyMicroCip plc;
         private readonly Timer _timer;
         public List<Tag> Tags { get; private set; }
+        public List<MqttTag> MqttTags { get; private set; }
 
         public M850Client()
         {
@@ -122,6 +123,10 @@ namespace DemoCaseGui.Core.Application.Communication
 
                     }
                 }
+                MqttTags = Tags.Select(e => new MqttTag(
+                  e.name,
+                  e.value,
+                  e.timestamp)).ToList();
             }
         }
 

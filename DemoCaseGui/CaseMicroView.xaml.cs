@@ -76,5 +76,10 @@ namespace DemoCaseGui
             X.Text = point.X.ToString("N");
             Y.Text = point.Y.ToString("N");
         }
+
+        private void Chart_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

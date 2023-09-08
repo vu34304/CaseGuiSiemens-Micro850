@@ -14,11 +14,12 @@ namespace DemoCaseGui.Core.Application.Communication
         private readonly AllenBradleyConnectedCipNet plc;
         private readonly Timer _timer;
         public List<Tag> Tags { get; private set; }
+        public List<MqttTag> MqttTags { get; private set; }
 
         public CPLogixClient()
         {
             plc = new AllenBradleyConnectedCipNet("192.168.1.101");
-            _timer = new Timer(100);
+            _timer = new Timer(500);
             _timer.Elapsed += _timer_Elapsed;
             Tags = new()
         {
@@ -124,6 +125,11 @@ namespace DemoCaseGui.Core.Application.Communication
 
                     }
                 }
+
+                MqttTags = Tags.Select(e => new MqttTag(
+                 e.name,
+                 e.value,
+                 e.timestamp)).ToList();
             }
         }
         public object? GetTagValue(string tagName)

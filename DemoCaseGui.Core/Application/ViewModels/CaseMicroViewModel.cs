@@ -41,6 +41,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
         public bool? Start_TrafficLights { get; set; }
         public bool? Stop_TrafficLights { get; set; }
+        public bool? start_trafficlights_old, stop_trafficlights_old;
 
         public float? Edit_RedLed { get; set; }
         public float? Edit_YellowLed { get; set; }
@@ -68,6 +69,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public float? Direction { get; set; }
         public bool? ButtonStartup { get; set; }
         public bool? ButtonStop { get; set; }
+        public bool? ButtonStartup1 { get; set; }
+        public bool? ButtonStop1 { get; set; }
 
         //Command
         public ICommand ConnectCommand { get; set; }
@@ -111,6 +114,30 @@ namespace DemoCaseGui.Core.Application.ViewModels
         private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             //TrafficLight
+
+            if ((bool?)_Micro850Client.GetTagValue("start_trafficlight") != start_trafficlights_old)
+            {
+                Start_TrafficLights = (bool?)_Micro850Client.GetTagValue("start_trafficlight");
+            }
+            start_trafficlights_old = (bool?)_Micro850Client.GetTagValue("start_trafficlight");
+            if (Start_TrafficLights is true)
+            {
+                ButtonStartup1 = true;
+                ButtonStop1 = false;
+            }
+
+            if ((bool?)_Micro850Client.GetTagValue("stop_trafficlight") != stop_trafficlights_old)
+            {
+                Stop_TrafficLights = (bool?)_Micro850Client.GetTagValue("stop_trafficlight");
+            }
+            stop_trafficlights_old = (bool?)_Micro850Client.GetTagValue("stop_trafficlight");
+            if (Stop_TrafficLights is true)
+            {
+                ButtonStartup1 = false;
+                ButtonStop1 = true;
+            }
+
+
             if ((bool?)_Micro850Client.GetTagValue("led2") != led2_old)
             {
                 Led2 = (bool?)_Micro850Client.GetTagValue("led2");

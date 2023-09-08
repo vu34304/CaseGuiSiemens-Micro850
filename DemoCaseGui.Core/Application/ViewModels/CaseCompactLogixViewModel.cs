@@ -83,6 +83,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ICommand Stop_Manual_Command { get; set; }
         public ICommand Start_Inverter_Command { get; set; }
         public ICommand Stop_Inverter_Command { get; set; }
+        public ICommand Forward_Inverter_Command { get; set; }
 
         public CaseCompactLogixViewModel()
         {
@@ -97,6 +98,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             Stop_Manual_Command = new RelayCommand(Manual_Stop);
             Start_Inverter_Command = new RelayCommand(Inverter_Start);
             Stop_Inverter_Command = new RelayCommand (Inverter_Stop);
+            Forward_Inverter_Command = new RelayCommand(Inverter_Forward);
 
         }
 
@@ -224,45 +226,52 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
         public void Auto_Start()
         {
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("START_AUTO_WEB"), true);
-            Thread.Sleep(1000);
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("START_AUTO_WEB"), false);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_auto"), true);
+            Thread.Sleep(500);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_auto"), false);
         }
 
         public void Auto_Stop()
         {
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("STOP_AUTO_WEB"), true);
-            Thread.Sleep(1000);
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("STOP_AUTO_WEB"), false);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_auto"), true);
+            Thread.Sleep(500);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_auto"), false);
         }
 
         public void Manual_Start()
         {
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("START_MANUAL_WEB"), true);
-            Thread.Sleep(1000);
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("START_MANUAL_WEB"), false);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_manual"), true);
+            Thread.Sleep(500);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_manual"), false);
         }
 
         public void Manual_Stop()
         {
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("STOP_MANUAL_WEB"), true);
-            Thread.Sleep(1000);
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("STOP_MANUAL_WEB"), false);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_manual"), true);
+            Thread.Sleep(500);
+            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_manual"), false);
         }
 
 
         public void Inverter_Start()
         {
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("START_INVERTER_WEB"), true);
-            Thread.Sleep(1000);
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("START_INVERTER_WEB"), false);
+            _CPLogixClient.WritePLC("START_INVERTER_WEB", true);
+            Thread.Sleep(500);
+            _CPLogixClient.WritePLC("START_INVERTER_WEB", false);
         }
 
         public void Inverter_Stop()
         {
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("STOP_INVERTER_WEB"), true);
-            Thread.Sleep(1000);
-            _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("STOP_INVERTER_WEB"), false);
+            _CPLogixClient.WritePLC("STOP_INVERTER_WEB", true);
+            Thread.Sleep(500);
+            _CPLogixClient.WritePLC("STOP_INVERTER_WEB", false);
+        }
+
+        public void Inverter_Forward()
+        {
+            _CPLogixClient.WritePLC("DAOCHIEU_WEB", true);
+            Thread.Sleep(500);
+            _CPLogixClient.WritePLC("DAOCHIEU_WEB", false);
         }
 
 
