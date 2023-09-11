@@ -28,6 +28,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ObservableCollection<FilterEntry> Entries { get; set; } = new();
         public TimeRangeQuery TimeRange { get; set; } = new();
         private string tagname = "";
+        private string tagname1 = "";
+        private string tagname2 = "";
         public string Tagname 
         { 
             get { return tagname; } 
@@ -38,13 +40,35 @@ namespace DemoCaseGui.Core.Application.ViewModels
             }
         }
 
-      
+        public string Tagname1
+        {
+            get { return tagname1; }
+            set
+            {
+                tagname1 = value;
+                var tag = _m850Client.Tags.First(i => i.dbname == tagname1);
+            }
+        }
+
+        public string Tagname2
+        {
+            get { return tagname2; }
+            set
+            {
+                tagname2 = value;
+                var tag = _CPLogixClient.Tags.First(i => i.dbname == tagname2);
+            }
+        }
+
 
         public ObservableCollection<string> Tagnames { get; set; } = new();
+        public ObservableCollection<string> Tagnames1 { get; set; } = new();
+        public ObservableCollection<string> Tagnames2 { get; set; } = new();
 
-     
 
         public ICommand FilterCommand { get; set; }
+        public ICommand FilterCommand1 { get; set; }
+        public ICommand FilterCommand2 { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
         public FilterViewModel()
         {
@@ -60,9 +84,12 @@ namespace DemoCaseGui.Core.Application.ViewModels
             
 
 
-            Tagnames = new ObservableCollection<string>(_s7Client.Tags.Select(i => i.dbname).Concat(_m850Client.Tags.Select(i => i.dbname)).Concat(_CPLogixClient.Tags.Select(i => i.dbname)).OrderBy(s => s));
+            Tagnames = new ObservableCollection<string>(_s7Client.Tags.Select(i => i.dbname).OrderBy(s => s));
+            Tagnames1 = new ObservableCollection<string>(_m850Client.Tags.Select(i => i.dbname).OrderBy(s => s));
+            Tagnames2 = new ObservableCollection<string>(_CPLogixClient.Tags.Select(i => i.dbname).OrderBy(s => s));
 
             FilterCommand = new RelayCommand(LoadAsync);
+           
             ExportToExcelCommand = new RelayCommand<string>(ExportToExcel);
         }
         private async void LoadAsync()
@@ -73,13 +100,12 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 var inverterLog = await inverterLogRepository.GetListAsync(TimeRange,Tagname);
                 var valiSiemensLog = await valiSiemensLogRepository.GetListAsync(TimeRange, Tagname);
                 var valiMicroLog = await valiMicroLogRepository.GetListAsync(TimeRange, Tagname1);
-                var valiCompactLog = await valiCompactLogRepository.GetListAsync(TimeRange, Tagname2);
+                var valiCompactLogs = await valiCompactLogRepository.GetListAsync(TimeRange, Tagname2);
 
                 var entriesvaliIfmLog = valiIfmLog.Select(e => new FilterEntry(
                     e.Name, 
                     e.Timestamp, 
-                    e.Value)).ToList();
-
+                    e.Value)).ToList(); 
 
                 var entriesinverterLog = inverterLog.Select(e => new FilterEntry(
                     e.Name,
@@ -90,15 +116,17 @@ namespace DemoCaseGui.Core.Application.ViewModels
                     e.Name,
                     e.Timestamp,
                     e.Value)).ToList();
+
                 var entriesvaliMicroLog = valiMicroLog.Select(e => new FilterEntry(
                    e.Name,
                    e.Timestamp,
                    e.Value)).ToList();
 
-                var entriesvaliCompactLog = valiCompactLog.Select(e => new FilterEntry(
+                var entriesvaliCompactLog = valiCompactLogs.Select(e => new FilterEntry(
                   e.Name,
                   e.Timestamp,
                   e.Value)).ToList();
+
 
                 List<FilterEntry> filters = new();
                 foreach (var entry in entriesvaliIfmLog )
@@ -117,10 +145,13 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 {
                     filters.Add(entry);
                 }
+
                 foreach (var entry in entriesvaliCompactLog)
                 {
                     filters.Add(entry);
                 }
+
+
 
                 Entries = new(filters);
             }
@@ -130,6 +161,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             }
         }
         
+
         private void ExportToExcel(string? filePath)
         {
             if (filePath is not null)

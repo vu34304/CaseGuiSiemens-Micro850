@@ -29,6 +29,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public bool? Q0_3 { get; set; }
 
         public bool? i0_0, i0_1, i0_2,i0_3,q0_0,q0_1,q0_2,q0_3;
+        public bool? Status_auto, Status_manual;
 
         //Traffic Lights
         public bool? DO1 { get;set; }
@@ -229,6 +230,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_auto"), true);
             Thread.Sleep(500);
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_auto"), false);
+            Status_auto = true;
+            Status_manual = false;
         }
 
         public void Auto_Stop()
@@ -236,6 +239,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_auto"), true);
             Thread.Sleep(500);
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_auto"), false);
+            Status_manual = true;
+            Status_auto = false;
         }
 
         public void Manual_Start()
