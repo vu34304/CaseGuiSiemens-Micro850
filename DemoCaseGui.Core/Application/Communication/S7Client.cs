@@ -13,8 +13,8 @@ public class S7Client
     public bool IsConnected => _plc.IsConnected;
     public S7Client()
     {
-        _plc = new Plc(CpuType.S71200, "192.168.0.1", 0, 1);
-        _plcW = new Plc(CpuType.S71200, "192.168.0.1", 0, 1);
+        _plc = new Plc(CpuType.S71200, "192.168.1.1", 0, 1);
+        _plcW = new Plc(CpuType.S71200, "192.168.1.1", 0, 1);
         _timer = new Timer(1000);
         _timer.Elapsed += TimerElapsed;
         Tags = new()

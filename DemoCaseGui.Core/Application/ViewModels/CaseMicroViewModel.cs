@@ -27,7 +27,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         private readonly MqttClient _mqttClient;
         private readonly Timer _timer;
         public bool IsMqttConnected => _mqttClient.IsConnected;
-        public ChartValues<float> Value { get; set; }
+        public ChartValues<double> Value { get; set; }
         //TrafficLight
 
         public bool? Led2 { get; set; }
@@ -71,6 +71,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public bool? ButtonStop { get; set; }
         public bool? ButtonStartup1 { get; set; }
         public bool? ButtonStop1 { get; set; }
+        public double MotorSpeed1 { get; set; }
 
         //Command
         public ICommand ConnectCommand { get; set; }
@@ -89,7 +90,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _Micro850Client = new M850Client();
             _timer = new Timer(500);
             _timer.Elapsed += _timer_Elapsed;
-            Value = new ChartValues<float> { };
+            Value = new ChartValues<double> { };
 
             //Button Command
             ConnectCommand = new RelayCommand(Connect);// Connect PLC
@@ -261,15 +262,16 @@ namespace DemoCaseGui.Core.Application.ViewModels
             if ((float?)_Micro850Client.GetTagValue("speed") != speed_old)
             {
                 MotorSpeed = (float?)_Micro850Client.GetTagValue("speed");
-                float   MotorSpeed1 = (float)_Micro850Client.GetTagValue("speed");
-                if ( Value.Count() < 15)
-                {                
-                        Value.Add(MotorSpeed1);
-                }
-                else Value.RemoveAt(0);
-
+                MotorSpeed1 =  Math.Round((float)_Micro850Client.GetTagValue("speed"),2);
             }
             speed_old = (float?)_Micro850Client.GetTagValue("speed");
+
+
+            if (Value.Count() < 50)
+            {
+                Value.Add(MotorSpeed1);
+            }
+            else Value.RemoveAt(0);
 
 
 

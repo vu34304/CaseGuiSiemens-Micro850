@@ -311,8 +311,8 @@ Margin="10">
                                         </lvc:CartesianChart.AxisX>
                                         <lvc:CartesianChart.Series>
                                             <lvc:LineSeries Values="{Binding Value}"                              
-                                              Fill="Transparent" StrokeThickness="4" 
-                                              Panel.ZIndex="2" PointGeometrySize="25"/>
+                                              Fill="Transparent" StrokeThickness="2" 
+                                              Panel.ZIndex="2" PointGeometrySize="3"/>
                                         </lvc:CartesianChart.Series>
                                     </lvc:CartesianChart>
 

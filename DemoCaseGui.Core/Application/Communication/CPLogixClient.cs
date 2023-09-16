@@ -76,13 +76,14 @@ namespace DemoCaseGui.Core.Application.Communication
 
             //INVERTER
             new("setpoint", "PLC.Vali_CPLogix.Inverter.setpoint", null, "BIEUDOHMI", DateTime.Now),
-
+             new("start_inverter", "PLC.Vali_CPLogix.TrafficLights.start_auto", null, "START_INVERTER_WEB", DateTime.Now),
+            new("stop_inverter", "PLC.Vali_CPLogix.TrafficLights.start_manual", null, "STOP_INVERTER_WEB", DateTime.Now),
 
             //Lights IFM
             new("den_do_ifm", "PLC.Vali_Micro850.yellowtime", null, "IFM_AL1322:O1.DATA[23].9", DateTime.Now),
             new("den_xanh_ifm", "PLC.Vali_Micro850.yellowtime", null, "IFM_AL1322:O1.DATA[23].1", DateTime.Now),
             new("den_vang_ifm", "PLC.Vali_Micro850.yellowtime", null, "IFM_AL1322:O1.DATA[24].9", DateTime.Now),
-            
+
         };
         }
 
@@ -90,7 +91,7 @@ namespace DemoCaseGui.Core.Application.Communication
         {
             foreach (var tag in Tags)
             {
-               
+
                 if (tag.name is "ugt_524" or "ki6000" or "05d_150" or "rpv_510" or "time_vang2_manual"
                     or "time_vang1_manual" or "time_xanh2_manual" or "time_xanh1_manual" or "time_do2_manual"
                     or "time_do1_manual" or "time_vang2_auto" or "time_vang1_auto" or "time_xanh2_auto"
@@ -109,7 +110,7 @@ namespace DemoCaseGui.Core.Application.Communication
 
                     }
                 }
-                
+
                 else
                 {
                     OperateResult<bool> data = plc.ReadBool(tag.address);

@@ -12,7 +12,7 @@ using Timer = System.Timers.Timer;
 
 namespace DemoCaseGui.Core.Application.ViewModels
 {
-    public class CaseCompactLogixViewModel: BaseViewModel
+    public class CaseCompactLogixViewModel : BaseViewModel
     {
         private readonly CPLogixClient _CPLogixClient;
         private readonly Timer _timer;
@@ -28,18 +28,25 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public bool? Q0_2 { get; set; }
         public bool? Q0_3 { get; set; }
 
-        public bool? i0_0, i0_1, i0_2,i0_3,q0_0,q0_1,q0_2,q0_3;
-        public bool? Status_auto, Status_manual;
+        public bool? i0_0, i0_1, i0_2, i0_3, q0_0, q0_1, q0_2, q0_3;
+        public bool? Start_auto, Start_manual, start_auto_old, start_manual_old, Stop_auto, Stop_manual, stop_auto_old, stop_manual_old, Start_Inverter, start_inverter_old, Stop_Inverter, stop_inverter_old;
+        public bool? LED_AUTO_ON { get; set; }
+        public bool? LED_MANUAL_ON { get; set; }
 
+        public bool? LED_AUTO_OFF { get; set; }
+        public bool? LED_MANUAL_OFF { get; set; }
+
+        public bool? LED_INVERTER_ON { get; set; }
+        public bool? LED_INVERTER_OFF { get; set; }
         //Traffic Lights
-        public bool? DO1 { get;set; }
+        public bool? DO1 { get; set; }
         public bool? DO2 { get; set; }
         public bool? XANH1 { get; set; }
         public bool? XANH2 { get; set; }
         public bool? VANG1 { get; set; }
         public bool? VANG2 { get; set; }
 
-        public bool? do1,do2,xanh1,xanh2,vang1,vang2;
+        public bool? do1, do2, xanh1, xanh2, vang1, vang2;
 
         //AUTO MODE
         public ushort? TIME_DO1_AUTO { get; set; }
@@ -49,7 +56,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ushort? TIME_VANG1_AUTO { get; set; }
         public ushort? TIME_VANG2_AUTO { get; set; }
 
-        public ushort? time_do1_auto,time_do2_auto,time_xanh1_auto,time_xanh2_auto, time_vang1_auto,time_vang2_auto;    
+        public ushort? time_do1_auto, time_do2_auto, time_xanh1_auto, time_xanh2_auto, time_vang1_auto, time_vang2_auto;
 
         //MANUAL MODE
         public ushort? TIME_DO1_MANUAL { get; set; }
@@ -62,9 +69,9 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ushort? time_do1_manual, time_do2_manual, time_xanh1_manual, time_xanh2_manual, time_vang1_manual, time_vang2_manual;
 
         //SENSOR
-        public ushort? DEVICE_UGT_524 { get;set; }
+        public ushort? DEVICE_UGT_524 { get; set; }
         public ushort? DEVICE_KI6000 { get; set; }
-        public ushort? DEVICE_O5D_150{ get; set; }
+        public ushort? DEVICE_O5D_150 { get; set; }
         public ushort? DEVICE_RPV_510 { get; set; }
 
         public ushort? device_ugt_524, device_ki6000, device_o5d_150, device_rpv_510;
@@ -94,11 +101,11 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
             ConnectCommand = new RelayCommand(Connect);
             Start_Auto_Command = new RelayCommand(Auto_Start);
-            Stop_Auto_Command =(new RelayCommand(Auto_Stop));
-            Start_Manual_Command =(new RelayCommand(Manual_Start));
+            Stop_Auto_Command = (new RelayCommand(Auto_Stop));
+            Start_Manual_Command = (new RelayCommand(Manual_Start));
             Stop_Manual_Command = new RelayCommand(Manual_Stop);
             Start_Inverter_Command = new RelayCommand(Inverter_Start);
-            Stop_Inverter_Command = new RelayCommand (Inverter_Stop);
+            Stop_Inverter_Command = new RelayCommand(Inverter_Stop);
             Forward_Inverter_Command = new RelayCommand(Inverter_Forward);
 
         }
@@ -106,6 +113,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             //IO
+
             if ((bool?)_CPLogixClient.GetTagValue("q0.0") != q0_0)
             {
                 Q0_0 = (bool?)_CPLogixClient.GetTagValue("q0.0");
@@ -136,6 +144,81 @@ namespace DemoCaseGui.Core.Application.ViewModels
             I0_3 = (bool?)_CPLogixClient.GetTagValue("i0.3");
 
             //TrafficLights
+
+            if ((bool?)_CPLogixClient.GetTagValue("start_auto") != start_auto_old)
+            {
+                Start_auto = (bool?)_CPLogixClient.GetTagValue("start_auto");
+            }
+            start_auto_old = (bool?)_CPLogixClient.GetTagValue("start_auto");
+
+            if (Start_auto is true)
+            {
+                LED_AUTO_ON = true;
+                LED_AUTO_OFF = false;
+            }
+
+            if ((bool?)_CPLogixClient.GetTagValue("stop_auto") != stop_auto_old)
+            {
+                Stop_auto = (bool?)_CPLogixClient.GetTagValue("stop_auto");
+            }
+            stop_auto_old = (bool?)_CPLogixClient.GetTagValue("stop_auto");
+
+            if (Stop_auto is true)
+            {
+                LED_AUTO_OFF = true;
+                LED_AUTO_ON = false;
+            }
+
+            if ((bool?)_CPLogixClient.GetTagValue("start_manual") != start_manual_old)
+            {
+                Start_manual = (bool?)_CPLogixClient.GetTagValue("start_manual");
+            }
+            start_manual_old = (bool?)_CPLogixClient.GetTagValue("start_manual");
+
+            if (Start_manual is true)
+            {
+                LED_MANUAL_ON = true;
+                LED_MANUAL_OFF = false;
+            }
+
+            if ((bool?)_CPLogixClient.GetTagValue("stop_manual") != stop_manual_old)
+            {
+                Stop_manual = (bool?)_CPLogixClient.GetTagValue("stop_manual");
+            }
+            stop_manual_old = (bool?)_CPLogixClient.GetTagValue("stop_manual");
+
+            if (Stop_manual is true)
+            {
+                LED_MANUAL_ON = false;
+                LED_MANUAL_OFF = true;
+            }
+
+            if ((bool?)_CPLogixClient.GetTagValue("start_inverter") != start_inverter_old)
+            {
+                Start_Inverter = (bool?)_CPLogixClient.GetTagValue("start_inverter");
+            }
+            start_inverter_old = (bool?)_CPLogixClient.GetTagValue("start_inverter");
+
+            if (Start_Inverter is true)
+            {
+                LED_INVERTER_ON = true;
+                LED_INVERTER_OFF = false;
+            }
+
+            if ((bool?)_CPLogixClient.GetTagValue("stop_inverter") != stop_inverter_old)
+            {
+                Stop_Inverter = (bool?)_CPLogixClient.GetTagValue("stop_inverter");
+            }
+            stop_inverter_old = (bool?)_CPLogixClient.GetTagValue("stop_inverter");
+
+            if (Stop_Inverter is true)
+            {
+                LED_INVERTER_ON = false;
+                LED_INVERTER_OFF = true;
+            }
+
+
+
             if ((bool?)_CPLogixClient.GetTagValue("led_do1") != do1)
             {
                 DO1 = (bool?)_CPLogixClient.GetTagValue("led_do1");
@@ -213,7 +296,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
             if ((bool?)_CPLogixClient.GetTagValue("den_vang_ifm") != den_vang_ifm)
             {
-               DEN_VANG_IFM = (bool?)_CPLogixClient.GetTagValue("den_vang_ifm");
+                DEN_VANG_IFM = (bool?)_CPLogixClient.GetTagValue("den_vang_ifm");
             }
             den_vang_ifm = (bool?)_CPLogixClient.GetTagValue("den_vang_ifm");
 
@@ -230,8 +313,6 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_auto"), true);
             Thread.Sleep(500);
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("start_auto"), false);
-            Status_auto = true;
-            Status_manual = false;
         }
 
         public void Auto_Stop()
@@ -239,8 +320,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_auto"), true);
             Thread.Sleep(500);
             _CPLogixClient.WritePLC(_CPLogixClient.GetTagAddress("stop_auto"), false);
-            Status_manual = true;
-            Status_auto = false;
+
         }
 
         public void Manual_Start()
