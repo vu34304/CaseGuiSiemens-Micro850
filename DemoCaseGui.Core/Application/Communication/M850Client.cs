@@ -24,6 +24,16 @@ namespace DemoCaseGui.Core.Application.Communication
             _timer = new Timer(500);
             _timer.Elapsed += _timer_Elapsed;
 
+
+
+
+
+
+
+
+
+
+
             Tags = new()
         {
             

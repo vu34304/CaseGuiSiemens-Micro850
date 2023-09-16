@@ -400,9 +400,10 @@ Margin="10">
 
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
                          Padding="5"
+                         Width="120"                                                   
                          Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="180">
-                                        <TextBlock Text="Motor" Style="{StaticResource FieldTitle}"/>
+                                    <StackPanel Orientation="Vertical" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <!--<TextBlock Text="Motor" Style="{StaticResource FieldTitle}"/>-->
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <!--<StackPanel Margin="0,0,10,0">
                                                 <TextBlock Text="Write Setpoint" HorizontalAlignment="Center"/>
@@ -418,7 +419,7 @@ Margin="10">
                                                 </StackPanel>
                                             </StackPanel>-->
                                             <StackPanel Margin="10,0,0,0">
-                                                <TextBlock Text="Read Setpoint" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Read Setpoint :" FontWeight="Bold"  HorizontalAlignment="Center"/>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                                     <TextBlock Text="{Binding MotorSetpoint, Mode=TwoWay}" HorizontalAlignment="Center"/>
                                                     <TextBlock Text=" RPM"/>
@@ -428,7 +429,7 @@ Margin="10">
 
 
 
-                                        <TextBlock Text="Speed" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Speed :" FontWeight="Bold" HorizontalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="{Binding MotorSpeed, Mode=TwoWay}" HorizontalAlignment="Center"/>
                                             <TextBlock Text=" RPM"/>

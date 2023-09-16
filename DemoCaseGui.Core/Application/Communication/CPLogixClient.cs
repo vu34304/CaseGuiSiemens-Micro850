@@ -75,7 +75,7 @@ namespace DemoCaseGui.Core.Application.Communication
             new("rpv_510", "PLC.Vali_CPLogix.Sensor.rpv_510_device", null, "RPV_510_ALARM.PV_DEVICE", DateTime.Now),
 
             //INVERTER
-            new("setpoint", "PLC.Vali_CPLogix.Inverter.setpoint", null, "BIEUDOHMI", DateTime.Now),
+            new("speed", "PLC.Vali_CPLogix.Inverter.setpoint", null, "BIEUDOHMI", DateTime.Now),
              new("start_inverter", "PLC.Vali_CPLogix.TrafficLights.start_auto", null, "START_INVERTER_WEB", DateTime.Now),
             new("stop_inverter", "PLC.Vali_CPLogix.TrafficLights.start_manual", null, "STOP_INVERTER_WEB", DateTime.Now),
 
@@ -92,10 +92,7 @@ namespace DemoCaseGui.Core.Application.Communication
             foreach (var tag in Tags)
             {
 
-                if (tag.name is "ugt_524" or "ki6000" or "05d_150" or "rpv_510" or "time_vang2_manual"
-                    or "time_vang1_manual" or "time_xanh2_manual" or "time_xanh1_manual" or "time_do2_manual"
-                    or "time_do1_manual" or "time_vang2_auto" or "time_vang1_auto" or "time_xanh2_auto"
-                    or "time_xanh1_auto" or "time_do2_auto" or "time_do1_auto")
+                if (tag.name is "ugt_524" or "ki6000" or "05d_150" or "rpv_510"  or "speed")
                 {
                     OperateResult<UInt16> data = plc.ReadUInt16(tag.address);
 

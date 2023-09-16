@@ -74,6 +74,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ushort? DEVICE_O5D_150 { get; set; }
         public ushort? DEVICE_RPV_510 { get; set; }
 
+        public bool? Status_Ki6000;
+
         public ushort? device_ugt_524, device_ki6000, device_o5d_150, device_rpv_510;
 
         //Lights IFM
@@ -82,6 +84,10 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public bool? DEN_XANH_IFM { get; set; }
 
         public bool? den_do_ifm, den_vang_ifm, den_xanh_ifm;
+
+        //Inverter
+        public ushort? Speed { get; set; }
+        public ushort speed_old;
 
 
         public ICommand ConnectCommand { get; set; }
@@ -269,6 +275,13 @@ namespace DemoCaseGui.Core.Application.ViewModels
             }
             device_ki6000 = (ushort?)_CPLogixClient.GetTagValue("ki6000");
 
+            if (DEVICE_KI6000 > 380)
+            {
+                Status_Ki6000 = true;
+            }
+            else Status_Ki6000 = false;
+
+
             if ((ushort?)_CPLogixClient.GetTagValue("05d_150") != device_o5d_150)
             {
                 DEVICE_O5D_150 = (ushort?)_CPLogixClient.GetTagValue("05d_150");
@@ -300,6 +313,12 @@ namespace DemoCaseGui.Core.Application.ViewModels
             }
             den_vang_ifm = (bool?)_CPLogixClient.GetTagValue("den_vang_ifm");
 
+
+            if ((ushort?)_CPLogixClient.GetTagValue("speed") != speed_old)
+            {
+                Speed = (ushort?)_CPLogixClient.GetTagValue("speed");
+            }
+            Speed = (ushort?)_CPLogixClient.GetTagValue("speed");
         }
 
         public void Connect()

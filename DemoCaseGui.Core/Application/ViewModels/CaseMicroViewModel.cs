@@ -263,15 +263,16 @@ namespace DemoCaseGui.Core.Application.ViewModels
             {
                 MotorSpeed = (float?)_Micro850Client.GetTagValue("speed");
                 MotorSpeed1 =  Math.Round((float)_Micro850Client.GetTagValue("speed"),2);
+                if (Value.Count() < 50)
+                {
+                    Value.Add(MotorSpeed1);
+                }
+                else Value.RemoveAt(0);
             }
             speed_old = (float?)_Micro850Client.GetTagValue("speed");
 
 
-            if (Value.Count() < 50)
-            {
-                Value.Add(MotorSpeed1);
-            }
-            else Value.RemoveAt(0);
+           
 
 
 

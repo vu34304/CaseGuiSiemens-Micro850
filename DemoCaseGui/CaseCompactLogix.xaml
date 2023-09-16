@@ -77,8 +77,8 @@
                                         <TextBlock Text="KI6000" Style="{StaticResource FieldTitle}"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-
-                                            <TextBlock Text="{Binding DEVICE_KI6000, StringFormat=N2}"/>
+                                            <components:Indicator Width="23" Height="23" Margin="5"
+                               State="{Binding Status_Ki6000, Mode=TwoWay}"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
@@ -331,16 +331,7 @@ Margin="10">
                         Margin="10">
                                     <StackPanel Orientation="Vertical" Width="120">
                                         <TextBlock Text="Motor Direction" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <components:Indicator Width="23" Height="23" Margin="5 5 13 5" OnColor="Yellow" 
-                                                  State="{Binding MotorForward, Mode=TwoWay}"/>
-                                            <components:Indicator Width="23" Height="23" Margin="13 5 5 5" OnColor="Yellow" 
-                                                  State="{Binding MotorReverse, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Forward" HorizontalAlignment="Center" Margin="5"/>
-                                            <TextBlock Text="Reverse" HorizontalAlignment="Center" Margin="5"/>
-                                        </StackPanel>
+                                      
                                         <Button Margin="10" Content="ĐẢO CHIỀU" Padding="0" Width="80" Height="20" Grid.Column="3" Grid.Row="0">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="Click">
@@ -353,10 +344,12 @@ Margin="10">
 
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
                         Padding="5"
+                                        
+                                        Width="100"
                         Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="180">
-                                        <TextBlock Text="Motor" Style="{StaticResource FieldTitle}"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" Width="180">
+                                        <TextBlock Text="Motor Speed" Style="{StaticResource FieldTitle}"/>
+                                        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <StackPanel Margin="0,0,10,0">
                                                 <TextBlock Text="Write Setpoint" HorizontalAlignment="Center"/>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -377,13 +370,13 @@ Margin="10">
                                                     <TextBlock Text=" RPM"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                        </StackPanel>
+                                        </StackPanel>-->
 
 
 
-                                        <TextBlock Text="Speed" HorizontalAlignment="Center"/>
+                                        
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding MotorSpeed, Mode=TwoWay}" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Speed, Mode=TwoWay}" HorizontalAlignment="Center"/>
                                             <TextBlock Text=" RPM"/>
                                         </StackPanel>
                                     </StackPanel>
