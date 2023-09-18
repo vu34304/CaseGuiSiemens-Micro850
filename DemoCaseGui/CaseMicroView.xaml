@@ -128,7 +128,7 @@ Style="{StaticResource ModuleTitle}"/>
                                        
          Padding="5"
          Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="150">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="150">
                                         <TextBlock Text="Traffic Lights Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <components:Indicator Width="23" Height="23" Margin="5" 
@@ -242,7 +242,7 @@ Style="{StaticResource ModuleTitle}"/>
                               
 Padding="5"
 Margin="10">
-                                    <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                                         <TextBlock Text="Xác nhận thông số" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
                                         <Button Margin="5 0" Content="CONFIRM" Padding="0" Width="70" Height="20" Grid.Column="3" Grid.Row="0">
                                             <i:Interaction.Triggers>
@@ -337,7 +337,7 @@ Margin="10">
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
                          Padding="5"
                          Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="120">
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="120">
                                         <TextBlock Text="Motor Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <components:Indicator Width="23" Height="23" Margin="5" 

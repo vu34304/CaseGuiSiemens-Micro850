@@ -23,8 +23,9 @@
         <materialDesign:Card Grid.Row="0" Margin="10">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="0.5 *"/>
                     <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
@@ -32,16 +33,25 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" 
+                <!--<TextBlock Grid.Column="0" 
                         Margin="10"
                         Style="{StaticResource FieldTitle}" 
-                        Text="Tag Name"/>
-
+                        Text="Tag Name"/>-->
+                <ComboBox x:Name="SelectModel"
+                      
+                     Margin="10"
+                    Style="{StaticResource ComboBox}"
+                          ItemsSource="{Binding Modes }"
+                          SelectedItem="{Binding Mode}"
+  materialDesign:HintAssist.Hint="Model">
+                   
+                    
+                </ComboBox>
                 <ComboBox Grid.Column="1"
                       Margin="10"
                       materialDesign:HintAssist.Hint="Tag Name"
                       Style="{StaticResource ComboBox}"
-                      ItemsSource="{Binding Tagnames }"
+                      ItemsSource="{Binding TagnameByModes }"
                       Text="{Binding Tagname}">
                     <ComboBox.ItemsPanel>
                         <ItemsPanelTemplate>

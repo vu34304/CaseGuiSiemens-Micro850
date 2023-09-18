@@ -329,7 +329,7 @@ Margin="10">
                                 <Border Grid.Row="1" Style="{StaticResource Frame}"
                         Padding="5"
                         Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="120">
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="120">
                                         <TextBlock Text="Motor Direction" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
                                       
                                         <Button Margin="10" Content="ĐẢO CHIỀU" Padding="0" Width="80" Height="20" Grid.Column="3" Grid.Row="0">

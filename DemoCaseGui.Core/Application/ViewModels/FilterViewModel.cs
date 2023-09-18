@@ -27,40 +27,63 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
         public ObservableCollection<FilterEntry> Entries { get; set; } = new();
         public TimeRangeQuery TimeRange { get; set; } = new();
+
+        public ObservableCollection<string> Modes { get; private set; }
         private string tagname = "";
         private string tagname1 = "";
         private string tagname2 = "";
-        public string Tagname 
-        { 
-            get { return tagname; } 
-            set 
-            { 
-                tagname = value; 
-                var tag = _s7Client.Tags.First(i => i.dbname == tagname);             
-            }
-        }
 
-        public string Tagname1
+        private string mode = "";
+
+        public string Mode
         {
-            get { return tagname1; }
+            get { return mode; }
             set
             {
-                tagname1 = value;
-                var tag = _m850Client.Tags.First(i => i.dbname == tagname1);
+                mode = value;
+                if (mode == "Vali Siemens" )
+                {
+                    TagnameByModes = Tagnames;
+
+                }
+                if (mode == "Vali Micro")
+                {
+                    TagnameByModes = Tagnames1;
+                }
+                if (mode == "Vali Compact")
+                {
+                    TagnameByModes = Tagnames2;
+                }
+
             }
         }
+  
 
-        public string Tagname2
+        public string Tagname
         {
-            get { return tagname2; }
+            get { return tagname; }
             set
             {
-                tagname2 = value;
-                var tag = _CPLogixClient.Tags.First(i => i.dbname == tagname2);
+                tagname = value;
+
+                if (mode == "Vali Siemens")
+                {
+                    var tag = _s7Client.Tags.First(i => i.dbname == tagname);
+                }
+                if (mode == "Vali Micro")
+                {
+                    var tag = _m850Client.Tags.First(i => i.dbname == tagname);
+                }
+                if (mode == "Vali Compact")
+                {
+                    var tag = _CPLogixClient.Tags.First(i => i.dbname == tagname);
+                }
             }
         }
 
+        
 
+        public ObservableCollection<string> TagnameByModes { get; set; } = new();
         public ObservableCollection<string> Tagnames { get; set; } = new();
         public ObservableCollection<string> Tagnames1 { get; set; } = new();
         public ObservableCollection<string> Tagnames2 { get; set; } = new();
@@ -81,9 +104,14 @@ namespace DemoCaseGui.Core.Application.ViewModels
             valiSiemensLogRepository = new ValiSiemensLogRepository();
             valiMicroLogRepository = new ValiMicroLogRepository();
             valiCompactLogRepository = new ValiCompactLogRepository();
-            
 
 
+            Modes = new ObservableCollection<string>()
+            {
+                "Vali Siemens",
+                "Vali Micro",
+                "Vali Compact"
+            };
             Tagnames = new ObservableCollection<string>(_s7Client.Tags.Select(i => i.dbname).OrderBy(s => s));
             Tagnames1 = new ObservableCollection<string>(_m850Client.Tags.Select(i => i.dbname).OrderBy(s => s));
             Tagnames2 = new ObservableCollection<string>(_CPLogixClient.Tags.Select(i => i.dbname).OrderBy(s => s));
@@ -99,8 +127,8 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 var valiIfmLog = await valiIfmLogRepository.GetListAsync(TimeRange,Tagname);
                 var inverterLog = await inverterLogRepository.GetListAsync(TimeRange,Tagname);
                 var valiSiemensLog = await valiSiemensLogRepository.GetListAsync(TimeRange, Tagname);
-                var valiMicroLog = await valiMicroLogRepository.GetListAsync(TimeRange, Tagname1);
-                var valiCompactLogs = await valiCompactLogRepository.GetListAsync(TimeRange, Tagname2);
+                var valiMicroLog = await valiMicroLogRepository.GetListAsync(TimeRange, Tagname);
+                var valiCompactLogs = await valiCompactLogRepository.GetListAsync(TimeRange, Tagname);
 
                 var entriesvaliIfmLog = valiIfmLog.Select(e => new FilterEntry(
                     e.Name, 
